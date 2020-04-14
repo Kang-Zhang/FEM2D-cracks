@@ -1,0 +1,30 @@
+#Y134-10
+#Leaf 2
+
+3 # number of measuremnts 
+
+0 # time  
+
+4 # number of data points 
+
+ 1 0 0
+ 2 1 0
+ 3 1 1
+ 4 0 0.99
+
+2 # time 
+
+4 # number of data points 
+
+ 1 0.4 0.4
+ 2 1 0
+ 3 1 4
+ 4 0 0.99
+
+4 # time
+4 # number of data points 
+
+ 1 0.4 0.4
+ 2 1 0
+ 3 4 4
+ 4 0 0.99

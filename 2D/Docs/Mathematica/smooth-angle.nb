@@ -1,0 +1,355 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     10575,        266]*)
+(*NotebookOutlinePosition[     11231,        289]*)
+(*  CellTagsIndexPosition[     11187,        285]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(len[v_] := Sqrt[v . v]\)], "Input"],
+
+Cell[BoxData[
+    \(norm[v1_] := v1/len[v1]\)], "Input"],
+
+Cell[BoxData[
+    \(cosa[v1_, v2_] := \((v1 . v2)\)/\((len[v1]*len[v2])\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ArcCos[cosa[{\(-1\), 1, 0}, {1, 2, 0}]] // N\)], "Input"],
+
+Cell[BoxData[
+    \(1.2490457723982544`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(v1 = {x1, y1, z1};\)\), "\[IndentingNewLine]", 
+    \(\(v2 = {x2, y2, z2};\)\), "\[IndentingNewLine]", 
+    \(\(v3 = s*v1 + t*v2;\)\), "\[IndentingNewLine]", 
+    \(Solve[v3 . v1 \[Equal] v3 . v2, {s, t}]\)}], "Input"],
+
+Cell[BoxData[
+    \(Solve::"svars" \(\(:\)\(\ \)\) 
+      "Equations may not give solutions for all \"solve\" variables."\)], \
+"Message"],
+
+Cell[BoxData[
+    \({{s \[Rule] \(-\(\(t\ \((x1\ x2 - x2\^2 + y1\ y2 - y2\^2 + z1\ z2 - 
+                      z2\^2)\)\)\/\(x1\^2 - x1\ x2 + y1\^2 - y1\ y2 + z1\^2 - 
+                  z1\ z2\)\)\)}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(v1 = {x1, y1, z1};\)\), "\[IndentingNewLine]", 
+    \(\(v2 = {x2, y2, z2};\)\), "\[IndentingNewLine]", 
+    \(\(v3 = s*v1 + t*v2;\)\), "\[IndentingNewLine]", 
+    \(Solve[cosa[v3, v1] \[Equal] cosa[v3, v2], {s, t}] // 
+      FullSimplify\)}], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(Solve::"verif"\), \(\(:\)\(\ \)\), "\<\"Potential solution \
+\\!\\({s \[Rule] \\*InterpretationBox[\\\"ComplexInfinity\\\", \
+DirectedInfinity[]]}\\) (possibly discarded by verifier) should be checked by \
+hand. May require use of limits.\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \(Solve::"svars" \(\(:\)\(\ \)\) 
+      "Equations may not give solutions for all \"solve\" variables."\)], \
+"Message"],
+
+Cell[BoxData[
+    \({{s \[Rule] \(t\ \@\(x2\^2 + y2\^2 + z2\^2\)\)\/\@\(x1\^2 + y1\^2 + \
+z1\^2\)}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(p1 = {x1, y1, z1};\)\), "\[IndentingNewLine]", 
+    \(\(p2 = {x2, y2, z2};\)\), "\[IndentingNewLine]", 
+    \(\(p3 = {x3, y3, z3};\)\), "\[IndentingNewLine]", 
+    \(\(p4 = {x4, y4, z4};\)\), "\[IndentingNewLine]", 
+    \(\(v1 = p1 - p2;\)\), "\[IndentingNewLine]", 
+    \(\(v2 = p3 - p1;\)\), "\[IndentingNewLine]", 
+    \(\(p5 = {x, y, z};\)\), "\[IndentingNewLine]", 
+    \(\(oriv = p4 - p2;\)\), "\[IndentingNewLine]", 
+    \(\(solv = p5 - p2;\)\), "\[IndentingNewLine]", 
+    \(Solve[{len[solv] \[Equal] len[oriv], 
+        cosa[solv, v1] \[Equal] cosa[solv, v2]}, p5]\)}], "Input"],
+
+Cell[BoxData[
+    \($Aborted\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(p1 = {x1, y1, z1};\)\), "\[IndentingNewLine]", 
+    \(\(p2 = {x2, y2, z2};\)\), "\[IndentingNewLine]", 
+    \(\(p3 = {x3, y3, z3};\)\), "\[IndentingNewLine]", 
+    \(\(p4 = {x4, y4, z4};\)\), "\[IndentingNewLine]", 
+    \(\(v1 = p1 - p2;\)\), "\[IndentingNewLine]", 
+    \(\(v2 = p3 - p1;\)\), "\[IndentingNewLine]", 
+    \(\(w1 = p1 - p4;\)\), "\[IndentingNewLine]", 
+    \(\(w2 = p3 - p4;\)\), "\[IndentingNewLine]", 
+    \(\(p5 = p4 + s*w1 + t*w2;\)\), "\[IndentingNewLine]", 
+    \(\(oriv = p4 - p2;\)\), "\[IndentingNewLine]", 
+    \(\(solv = p5 - p2;\)\), "\[IndentingNewLine]", 
+    \(Solve[{len[solv] \[Equal] len[oriv], 
+        cosa[solv, v1] \[Equal] cosa[solv, v2]}, {s, t}]\)}], "Input"],
+
+Cell[BoxData[
+    \($Aborted\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(lensq[v_] := v . v\)], "Input"],
+
+Cell[BoxData[{
+    \(\(p1 = {x1, y1, z1};\)\), "\[IndentingNewLine]", 
+    \(\(p2 = {x2, y2, z2};\)\), "\[IndentingNewLine]", 
+    \(\(p3 = {x3, y3, z3};\)\), "\[IndentingNewLine]", 
+    \(\(p4 = {x4, y4, z4};\)\), "\[IndentingNewLine]", 
+    \(\(v1 = p1 - p2;\)\), "\[IndentingNewLine]", 
+    \(\(v2 = p3 - p1;\)\), "\[IndentingNewLine]", 
+    \(\(w1 = p1 - p4;\)\), "\[IndentingNewLine]", 
+    \(\(w2 = p3 - p4;\)\), "\[IndentingNewLine]", 
+    \(\(p5 = p4 + s*w1 + t*w2;\)\), "\[IndentingNewLine]", 
+    \(\(oriv = p4 - p2;\)\), "\[IndentingNewLine]", 
+    \(\(solv = p5 - p2;\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Solve[lensq[solv] == lensq[oriv], {s, t}]\)], "Input"],
+
+Cell[BoxData[
+    \(Solve::"svars" \(\(:\)\(\ \)\) 
+      "Equations may not give solutions for all \"solve\" variables."\)], \
+"Message"],
+
+Cell[BoxData[
+    \({{s \[Rule] \((2\ x1\ x2 - 2\ t\ x1\ x3 - 2\ x1\ x4 + 2\ t\ x1\ x4 - 
+                2\ x2\ x4 + 2\ t\ x3\ x4 + 2\ x4\^2 - 2\ t\ x4\^2 + 
+                2\ y1\ y2 - 2\ t\ y1\ y3 - 2\ y1\ y4 + 2\ t\ y1\ y4 - 
+                2\ y2\ y4 + 2\ t\ y3\ y4 + 2\ y4\^2 - 2\ t\ y4\^2 + 
+                2\ z1\ z2 - 2\ t\ z1\ z3 - 2\ z1\ z4 + 2\ t\ z1\ z4 - 
+                2\ z2\ z4 + 2\ t\ z3\ z4 + 2\ z4\^2 - 
+                2\ t\ z4\^2 - \[Sqrt]\((4\ t\ \((x1\^2 - 2\ x1\ x4 + x4\^2 + 
+                            y1\^2 - 2\ y1\ y4 + y4\^2 + z1\^2 - 2\ z1\ z4 + 
+                            z4\^2)\)\ \((2\ x2\ x3 - t\ x3\^2 - 2\ x2\ x4 - 
+                            2\ x3\ x4 + 2\ t\ x3\ x4 + 2\ x4\^2 - t\ x4\^2 + 
+                            2\ y2\ y3 - t\ y3\^2 - 2\ y2\ y4 - 2\ y3\ y4 + 
+                            2\ t\ y3\ y4 + 2\ y4\^2 - t\ y4\^2 + 2\ z2\ z3 - 
+                            t\ z3\^2 - 2\ z2\ z4 - 2\ z3\ z4 + 2\ t\ z3\ z4 + 
+                            2\ z4\^2 - t\ z4\^2)\) + \((\(-2\)\ x1\ x2 + 
+                            2\ t\ x1\ x3 + 2\ x1\ x4 - 2\ t\ x1\ x4 + 
+                            2\ x2\ x4 - 2\ t\ x3\ x4 - 2\ x4\^2 + 
+                            2\ t\ x4\^2 - 2\ y1\ y2 + 2\ t\ y1\ y3 + 
+                            2\ y1\ y4 - 2\ t\ y1\ y4 + 2\ y2\ y4 - 
+                            2\ t\ y3\ y4 - 2\ y4\^2 + 2\ t\ y4\^2 - 
+                            2\ z1\ z2 + 2\ t\ z1\ z3 + 2\ z1\ z4 - 
+                            2\ t\ z1\ z4 + 2\ z2\ z4 - 2\ t\ z3\ z4 - 
+                            2\ z4\^2 + 
+                            2\ t\ z4\^2)\)^2)\))\)/\((2\ \((x1\^2 - 
+                    2\ x1\ x4 + x4\^2 + y1\^2 - 2\ y1\ y4 + y4\^2 + z1\^2 - 
+                    2\ z1\ z4 + z4\^2)\))\)}, {s \[Rule] \((2\ x1\ x2 - 
+                2\ t\ x1\ x3 - 2\ x1\ x4 + 2\ t\ x1\ x4 - 2\ x2\ x4 + 
+                2\ t\ x3\ x4 + 2\ x4\^2 - 2\ t\ x4\^2 + 2\ y1\ y2 - 
+                2\ t\ y1\ y3 - 2\ y1\ y4 + 2\ t\ y1\ y4 - 2\ y2\ y4 + 
+                2\ t\ y3\ y4 + 2\ y4\^2 - 2\ t\ y4\^2 + 2\ z1\ z2 - 
+                2\ t\ z1\ z3 - 2\ z1\ z4 + 2\ t\ z1\ z4 - 2\ z2\ z4 + 
+                2\ t\ z3\ z4 + 2\ z4\^2 - 
+                2\ t\ z4\^2 + \[Sqrt]\((4\ t\ \((x1\^2 - 2\ x1\ x4 + x4\^2 + 
+                            y1\^2 - 2\ y1\ y4 + y4\^2 + z1\^2 - 2\ z1\ z4 + 
+                            z4\^2)\)\ \((2\ x2\ x3 - t\ x3\^2 - 2\ x2\ x4 - 
+                            2\ x3\ x4 + 2\ t\ x3\ x4 + 2\ x4\^2 - t\ x4\^2 + 
+                            2\ y2\ y3 - t\ y3\^2 - 2\ y2\ y4 - 2\ y3\ y4 + 
+                            2\ t\ y3\ y4 + 2\ y4\^2 - t\ y4\^2 + 2\ z2\ z3 - 
+                            t\ z3\^2 - 2\ z2\ z4 - 2\ z3\ z4 + 2\ t\ z3\ z4 + 
+                            2\ z4\^2 - t\ z4\^2)\) + \((\(-2\)\ x1\ x2 + 
+                            2\ t\ x1\ x3 + 2\ x1\ x4 - 2\ t\ x1\ x4 + 
+                            2\ x2\ x4 - 2\ t\ x3\ x4 - 2\ x4\^2 + 
+                            2\ t\ x4\^2 - 2\ y1\ y2 + 2\ t\ y1\ y3 + 
+                            2\ y1\ y4 - 2\ t\ y1\ y4 + 2\ y2\ y4 - 
+                            2\ t\ y3\ y4 - 2\ y4\^2 + 2\ t\ y4\^2 - 
+                            2\ z1\ z2 + 2\ t\ z1\ z3 + 2\ z1\ z4 - 
+                            2\ t\ z1\ z4 + 2\ z2\ z4 - 2\ t\ z3\ z4 - 
+                            2\ z4\^2 + 
+                            2\ t\ z4\^2)\)^2)\))\)/\((2\ \((x1\^2 - 
+                    2\ x1\ x4 + x4\^2 + y1\^2 - 2\ y1\ y4 + y4\^2 + z1\^2 - 
+                    2\ z1\ z4 + z4\^2)\))\)}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Solve[{cosa[solv, v1] \[Equal] cosa[solv, v2]}, {s, t}]\)], "Input"],
+
+Cell[BoxData[
+    \($Aborted\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(lensq[solv] == lensq[oriv]\)], "Input"],
+
+Cell[BoxData[
+    \(\((\(-x2\) + s\ \((x1 - x4)\) + t\ \((x3 - x4)\) + x4)\)\^2 + \
+\((\(-y2\) + s\ \((y1 - y4)\) + t\ \((y3 - y4)\) + y4)\)\^2 + \((\(-z2\) + s\ \
+\((z1 - z4)\) + t\ \((z3 - z4)\) + z4)\)\^2 == \((\(-x2\) + x4)\)\^2 + \
+\((\(-y2\) + y4)\)\^2 + \((\(-z2\) + z4)\)\^2\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(p1 = {0, 0, 0};\)\), "\[IndentingNewLine]", 
+    \(\(p2 = {x2, y2, z2};\)\), "\[IndentingNewLine]", 
+    \(\(p3 = {x3, y3, z3};\)\), "\[IndentingNewLine]", 
+    \(\(n = {nx, ny, nz};\)\), "\[IndentingNewLine]", 
+    \(Solve[{cosa[p3 - p1, p2 - p1] \[Equal] Cos[alpha], 
+        lensq[p3 - p1] \[Equal] lensq[p2 - p1], 
+        cosa[p3 - p1, n] \[Equal] cosa[p2 - p1, n]}, p3]\)}], "Input"],
+
+Cell[BoxData[
+    \($Aborted\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1600}, {0, 1124}},
+WindowSize->{1082, 1096},
+WindowMargins->{{0, Automatic}, {Automatic, 0}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 55, 1, 30, "Input"],
+Cell[1775, 52, 56, 1, 30, "Input"],
+Cell[1834, 55, 86, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[1945, 60, 77, 1, 30, "Input"],
+Cell[2025, 63, 53, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2115, 69, 241, 4, 90, "Input"],
+Cell[2359, 75, 138, 3, 24, "Message"],
+Cell[2500, 80, 214, 3, 47, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2751, 88, 274, 5, 90, "Input"],
+Cell[3028, 95, 286, 4, 24, "Message"],
+Cell[3317, 101, 138, 3, 24, "Message"],
+Cell[3458, 106, 113, 2, 52, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3608, 113, 610, 11, 210, "Input"],
+Cell[4221, 126, 42, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4300, 132, 723, 13, 250, "Input"],
+Cell[5026, 147, 42, 1, 29, "Output"]
+}, Open  ]],
+Cell[5083, 151, 51, 1, 30, "Input"],
+Cell[5137, 154, 595, 11, 230, "Input"],
+
+Cell[CellGroupData[{
+Cell[5757, 169, 74, 1, 30, "Input"],
+Cell[5834, 172, 138, 3, 24, "Message"],
+Cell[5975, 177, 3525, 50, 246, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9537, 232, 88, 1, 30, "Input"],
+Cell[9628, 235, 42, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9707, 241, 59, 1, 30, "Input"],
+Cell[9769, 244, 296, 4, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10102, 253, 412, 7, 110, "Input"],
+Cell[10517, 262, 42, 1, 29, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

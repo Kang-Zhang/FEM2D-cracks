@@ -1,0 +1,31 @@
+Relax() method will work in two stesp:
+	- find a local solution for unknowns where the error is very large
+	- find the global solution
+
+Details:
+
+	relax() is split into two parts:
+
+		relax_local();
+		relax_global();
+
+	relax_local()
+
+		// calculate error of the current solution:
+		- KgC = Kg
+		- insert global constraints into KgC
+		- calculate error for each unknown
+		- mark nodes corresponding to large errors
+		- mark the nodes in their neighborhoods
+
+		// calculate local solution
+		- KgCL = Kg
+		- insert local constraints into KgCL
+		- solve for local unknowns
+
+	relax_global()
+
+		// reuse KgC from the relax_local()
+		- calculate global solution
+
+

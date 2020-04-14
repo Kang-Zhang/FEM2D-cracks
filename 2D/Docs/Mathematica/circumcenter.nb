@@ -1,0 +1,267 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6026,        186]*)
+(*NotebookOutlinePosition[      6683,        209]*)
+(*  CellTagsIndexPosition[      6639,        205]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(dist[p1_, p2_] := len[p1 - p2]\)], "Input"],
+
+Cell[BoxData[{
+    \(\(p1 = {0, 0, 0};\)\), "\[IndentingNewLine]", 
+    \(\(p2 = {x2, y2, z2};\)\), "\[IndentingNewLine]", 
+    \(\(p3 = {x3, y3, z3};\)\), "\[IndentingNewLine]", 
+    \(\(p0 = t*\((p2 - p1)\) + s*\((p3 - p1)\);\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Solve[{dist[p1, p0] \[Equal] dist[p2, p0], 
+          dist[p2, p0] \[Equal] dist[p3, p0]}, {s, t}] // Simplify\)], "Input"],
+
+Cell[BoxData[
+    \({{s \[Rule] \(-\(\(\((x2\^2 + y2\^2 + z2\^2)\)\ \((x2\ x3 - x3\^2 + 
+                      y2\ y3 - y3\^2 + z2\ z3 - 
+                      z3\^2)\)\)\/\(2\ \((x3\^2\ \((y2\^2 + 
+                            z2\^2)\) + \((y3\ z2 - y2\ z3)\)\^2 - 
+                      2\ x2\ x3\ \((y2\ y3 + z2\ z3)\) + 
+                      x2\^2\ \((y3\^2 + z3\^2)\))\)\)\)\), 
+        t \[Rule] \(\((x2\^2 - x2\ x3 + y2\^2 - y2\ y3 + z2\ \((z2 - z3)\))\)\
+\ \((x3\^2 + y3\^2 + z3\^2)\)\)\/\(2\ \((x3\^2\ \((y2\^2 + z2\^2)\) + \((y3\ \
+z2 - y2\ z3)\)\^2 - 2\ x2\ x3\ \((y2\ y3 + z2\ z3)\) + x2\^2\ \((y3\^2 + \
+z3\^2)\))\)\)}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[
+      2\ \((x3\^2\ \((y2\^2 + z2\^2)\) + \((y3\ z2 - y2\ z3)\)\^2 - 
+            2\ x2\ x3\ \((y2\ y3 + z2\ z3)\) + 
+            x2\^2\ \((y3\^2 + z3\^2)\))\)]\)], "Input"],
+
+Cell["\<\
+2*(Power(x3,2)*(Power(y2,2) + Power(z2,2)) + Power(y3*z2 - y2*z3,2) - \
+2*x2*x3*(y2*y3 + z2*z3) + 
+     Power(x2,2)*(Power(y3,2) + Power(z3,2)))\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[\((x2\^2 + y2\^2 + z2\^2)\)\ \((x2\ x3 - x3\^2 + y2\ y3 - y3\^2 + 
+            z2\ z3 - z3\^2)\)]\)], "Input"],
+
+Cell["\<\
+(Power(x2,2) + Power(y2,2) + Power(z2,2))*(x2*x3 - Power(x3,2) + y2*y3 - \
+Power(y3,2) + z2*z3 - Power(z3,2))\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[\((x2\^2 - x2\ x3 + y2\^2 - y2\ y3 + 
+            z2\ \((z2 - z3)\))\)\ \((x3\^2 + y3\^2 + z3\^2)\)]\)], "Input"],
+
+Cell["\<\
+(Power(x2,2) - x2*x3 + Power(y2,2) - y2*y3 + z2*(z2 - z3))*(Power(x3,2) + \
+Power(y3,2) + Power(z3,2))\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[%]\)], "Input"],
+
+Cell["\<\
+List(List(Rule(s,-((Power(x2,2) + Power(y2,2) + Power(z2,2))*(x2*x3 - \
+Power(x3,2) + y2*y3 - Power(y3,2) + z2*z3 - Power(z3,2)))/
+      (2.*(Power(x3,2)*(Power(y2,2) + Power(z2,2)) + Power(y3*z2 - y2*z3,2) - \
+2*x2*x3*(y2*y3 + z2*z3) + 
+          Power(x2,2)*(Power(y3,2) + Power(z3,2))))),Rule(t,
+     ((Power(x2,2) - x2*x3 + Power(y2,2) - y2*y3 + z2*(z2 - z3))*(Power(x3,2) \
++ Power(y3,2) + Power(z3,2)))/
+      (2.*(Power(x3,2)*(Power(y2,2) + Power(z2,2)) + Power(y3*z2 - y2*z3,2) - \
+2*x2*x3*(y2*y3 + z2*z3) + 
+          Power(x2,2)*(Power(y3,2) + Power(z3,2)))))))\
+\>", "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(circumcenteriso[{x2_, y2_, z2_}, {x3_, y3_, 
+          z3_}] := {\(\((x2\^2 - x2\ x3 + y2\^2 - y2\ y3 + z2\ \((z2 - z3)\))\
+\)\ \((x3\^2 + y3\^2 + z3\^2)\)\)\/\(2\ \((x3\^2\ \((y2\^2 + z2\^2)\) + \((y3\
+\ z2 - y2\ z3)\)\^2 - 2\ x2\ x3\ \((y2\ y3 + z2\ z3)\) + x2\^2\ \((y3\^2 + z3\
+\^2)\))\)\), \(-\(\(\((x2\^2 + y2\^2 + z2\^2)\)\ \((x2\ x3 - x3\^2 + y2\ y3 - 
+                    y3\^2 + z2\ z3 - 
+                    z3\^2)\)\)\/\(2\ \((x3\^2\ \((y2\^2 + 
+                          z2\^2)\) + \((y3\ z2 - y2\ z3)\)\^2 - 
+                    2\ x2\ x3\ \((y2\ y3 + z2\ z3)\) + 
+                    x2\^2\ \((y3\^2 + z3\^2)\))\)\)\)\)}\)], "Input"],
+
+Cell[BoxData[
+    \(circumcenteriso[p1_, p2_, p3_] := 
+      circumcenteriso[p2 - p1, p3 - p1]\)], "Input"],
+
+Cell[BoxData[
+    \(isotocart[p1_, p2_, p3_, {t_, s_}] := \((p2 - p1)\)*t + 
+        p1 + \((p3 - p1)\)*s\)], "Input"],
+
+Cell[BoxData[
+    \(circumcenter[p1_, p2_, p3_] := 
+      isotocart[p1, p2, p3, circumcenteriso[p1, p2, p3]]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(circumcenteriso[{1, 0, 0}, {3, 0, 0}, {2, 1, 0}]\)], "Input"],
+
+Cell[BoxData[
+    \({1\/2, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(circumcenter[{1, 0, 0}, {3, 0, 0}, {2, 1, 0}]\)], "Input"],
+
+Cell[BoxData[
+    \({2, 0, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(p3\)], "Input"],
+
+Cell[BoxData[
+    \(p3\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1600}, {0, 1124}},
+WindowSize->{1039, 740},
+WindowMargins->{{70, Automatic}, {Automatic, 77}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 63, 1, 30, "Input"],
+Cell[1783, 52, 243, 4, 90, "Input"],
+
+Cell[CellGroupData[{
+Cell[2051, 60, 143, 2, 30, "Input"],
+Cell[2197, 64, 646, 10, 87, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2880, 79, 199, 4, 31, "Input"],
+Cell[3082, 85, 170, 4, 60, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3289, 94, 136, 2, 31, "Input"],
+Cell[3428, 98, 135, 3, 43, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3600, 106, 139, 2, 31, "Input"],
+Cell[3742, 110, 128, 3, 43, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3907, 118, 41, 1, 30, "Input"],
+Cell[3951, 121, 597, 11, 128, "Output"]
+}, Open  ]],
+Cell[4563, 135, 668, 10, 108, "Input"],
+Cell[5234, 147, 107, 2, 30, "Input"],
+Cell[5344, 151, 118, 2, 30, "Input"],
+Cell[5465, 155, 121, 2, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[5611, 161, 81, 1, 30, "Input"],
+Cell[5695, 164, 43, 1, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5775, 170, 78, 1, 30, "Input"],
+Cell[5856, 173, 43, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5936, 179, 35, 1, 30, "Input"],
+Cell[5974, 182, 36, 1, 29, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

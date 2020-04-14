@@ -1,0 +1,25 @@
+#Y134- 1 #only one leaf on the plant.  
+#Leaf 1
+
+2 # number of measurements 
+
+0 #time 
+
+4 #number of data points
+
+1 0 0
+2 1 0
+3 1 1
+4 0 1
+
+2 # time
+
+5 # number of data points 
+
+1 0 0
+2 2 0
+3 2 2
+4 0 2
+5 1.9 1.9
+
+

@@ -1,0 +1,238 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5420,        167]*)
+(*NotebookOutlinePosition[      6077,        190]*)
+(*  CellTagsIndexPosition[      6033,        186]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[{
+    \(\(p1 = {0, 0, 0.1};\)\), "\[IndentingNewLine]", 
+    \(\(p2 = {1, 0, 0.1};\)\), "\[IndentingNewLine]", 
+    \(\(p3 = {0, 1, 0.1};\)\), "\[IndentingNewLine]", 
+    \(\(p4 = {0, 0, 0};\)\), "\[IndentingNewLine]", 
+    \(\(p5 = {1, 0, 0};\)\), "\[IndentingNewLine]", 
+    \(\(p6 = {0, 1, 0};\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Map[f[a], {x, y, z}]\)], "Input"],
+
+Cell[BoxData[
+    \({\(f[a]\)[x], \(f[a]\)[y], \(f[a]\)[z]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Inverse[{{1, 2, 0}, {3, 2, 1}, {4, 4, 1}}]\)], "Input"],
+
+Cell[BoxData[
+    \(Inverse::"sing" \(\(:\)\(\ \)\) 
+      "Matrix \!\({\(\({1, 2, 0}\)\), \(\({3, 2, 1}\)\), \(\({4, 4, 1}\)\)}\) \
+is singular."\)], "Message"],
+
+Cell[BoxData[
+    \(Inverse[{{1, 2, 0}, {3, 2, 1}, {4, 4, 1}}]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(PseudoInverse[{{1, 2, 0}, {3, 2, 1}, {4, 4, 1}}, 
+        Tolerance \[Rule] 0.000001] . {{1, 2, 0}, {3, 2, 1}, {4, 4, 
+          1}}\)], "Input"],
+
+Cell[BoxData[
+    \({{17\/21, 2\/21, 8\/21}, {2\/21, 
+        20\/21, \(-\(4\/21\)\)}, {8\/21, \(-\(4\/21\)\), 5\/21}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(PseudoInverse[{{a, b, c}, {d, e, f}, {a + d, b + e, c + f}}, 
+        Tolerance \[Rule] x] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \(General::"dbyz" \(\(:\)\(\ \)\) "Division by zero."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"dbyz" \(\(:\)\(\ \)\) "Division by zero."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"dbyz" \(\(:\)\(\ \)\) "Division by zero."\)], "Message"],
+
+Cell[BoxData[
+    \(General::"stop" \(\(:\)\(\ \)\) 
+      "Further output of \!\(General :: \"dbyz\"\) will be suppressed during \
+this calculation."\)], "Message"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]], ",", 
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]], ",", 
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]], ",", 
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]], ",", 
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]]}], "}"}], ",", 
+        RowBox[{"{", 
+          RowBox[{
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]], ",", 
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]], ",", 
+            InterpretationBox["ComplexInfinity",
+              DirectedInfinity[ ]]}], "}"}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Det[{{a, b, c}, {d, e, f}, {g, h, i}}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(-c\)\ e\ g + b\ f\ g + c\ d\ h - a\ f\ h - b\ d\ i + 
+      a\ e\ i\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Inverse[{{a, b, c}, {d, e, f}, {a + b, b + e, c + f}}] // 
+      Simplify\)], "Input"],
+
+Cell[BoxData[
+    \({{1\/\(\(-b\) + d\), 1\/\(\(-b\) + d\), 
+        1\/\(b - d\)}, {\(\(-c\)\ d + \((a + b - d)\)\ f\)\/\(\((b - d)\)\ \
+\((\(-c\)\ e + b\ f)\)\), \(\(-b\)\ c + a\ f\)\/\(\((b - d)\)\ \((\(-c\)\ e + \
+b\ f)\)\), \(c\ d - a\ f\)\/\(\((b - d)\)\ \((\(-c\)\ e + b\ f)\)\)}, {\(b\ \
+\((d - e)\) + \((\(-a\) + d)\)\ e\)\/\(\((b - d)\)\ \((\(-c\)\ e + b\ f)\)\), \
+\(b\^2 - a\ e\)\/\(\((b - d)\)\ \((\(-c\)\ e + b\ f)\)\), \(\(-b\)\ d + a\ \
+e\)\/\(\((b - d)\)\ \((\(-c\)\ e + b\ f)\)\)}}\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1600}, {0, 1124}},
+WindowSize->{832, 740},
+WindowMargins->{{Automatic, 357}, {Automatic, 22}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 325, 6, 130, "Input"],
+
+Cell[CellGroupData[{
+Cell[2067, 59, 53, 1, 30, "Input"],
+Cell[2123, 62, 73, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2233, 68, 75, 1, 30, "Input"],
+Cell[2311, 71, 161, 3, 24, "Message"],
+Cell[2475, 76, 76, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2588, 82, 165, 3, 30, "Input"],
+Cell[2756, 87, 132, 2, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2925, 94, 139, 2, 30, "Input"],
+Cell[3067, 98, 86, 1, 24, "Message"],
+Cell[3156, 101, 86, 1, 24, "Message"],
+Cell[3245, 104, 86, 1, 24, "Message"],
+Cell[3334, 107, 165, 3, 24, "Message"],
+Cell[3502, 112, 1029, 26, 48, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4568, 143, 71, 1, 30, "Input"],
+Cell[4642, 146, 103, 2, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4782, 153, 106, 2, 30, "Input"],
+Cell[4891, 157, 513, 7, 83, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

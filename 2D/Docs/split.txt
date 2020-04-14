@@ -1,0 +1,22 @@
+split triangle p0, p1, p2 by plane (p0, nv)
+
+// decide whether the triangle should be split or not
+// --------------------------------------------------
+
+r = isopar. coordinate of the plane(p0,nv) -edge(p1,p2) intersection
+p3 = (p1,p2,r)
+
+// calculate the two angles
+angle1 = angle(p1-p0,p3-p0)
+angle2 = angle(p2-p0,p3-p0)
+
+if r <= 0 || r >= 1 || angle1 < min_angle || angle2 < min_angle then
+	// the whole triangle is above or below
+	if more of the triangle above then
+		declare triangle above
+	else
+		declare triangle below
+
+// both angle1 and angle2 are bigger than min_angle, so the triangle will
+// be split
+

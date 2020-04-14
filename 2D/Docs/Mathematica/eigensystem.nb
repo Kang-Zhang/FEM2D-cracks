@@ -1,0 +1,2076 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[    105515,       1878]*)
+(*NotebookOutlinePosition[    106224,       1903]*)
+(*  CellTagsIndexPosition[    106180,       1899]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+    \(Eigenvalues[{{2, 1}, {3, \(-1\)}}]\)], "Input"],
+
+Cell[BoxData[
+    \({1\/2\ \((1 - \@21)\), 1\/2\ \((1 + \@21)\)}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigenvalues[{{a, b}, {c, d}}]\)], "Input"],
+
+Cell[BoxData[
+    \({1\/2\ \((a + d - \@\(a\^2 + 4\ b\ c - 2\ a\ d + d\^2\))\), 
+      1\/2\ \((a + d + \@\(a\^2 + 4\ b\ c - 2\ a\ d + d\^2\))\)}\)], "Output"]
+}, Open  ]],
+
+Cell["Symmetric matrix: eigenvalues of:", "Commentary"],
+
+Cell[BoxData[
+    \(m := {{xx, xy, xz}, {xy, yy, yz}, {xz, yz, zz}}\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[Eigenvalues[m]]\)], "Input"],
+
+Cell[BoxData[
+    \({1\/6\ \((2\ \((xx + yy + 
+                  zz)\) + \((2\ 2\^\(1/3\)\ \((xx\^2 + 3\ xy\^2 + 3\ xz\^2 + 
+                      yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - 
+                      xx\ \((yy + zz)\))\))\)/\((2\ xx\^3 - 18\ xz\^2\ yy + 
+                    2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                    9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                    3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                    3\ xx\^2\ \((yy + zz)\) - 
+                    3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                          4\ yy\ zz + 
+                          zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + \
+3\ xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\
+\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 9\ xy\^2\
+\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ \
+zz\^2 + 2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - \
+yy\^2 - 6\ yz\^2 + 4\ yy\ zz - zz\^2)\))\)\^2)\))\)^\((1/3)\) + 
+            2\^\(2/3\)\ \((2\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 
+                    54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                    9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                    3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                    3\ xx\^2\ \((yy + zz)\) - 
+                    3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                          4\ yy\ zz + 
+                          zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + \
+3\ xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\
+\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 9\ xy\^2\
+\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ \
+zz\^2 + 2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - \
+yy\^2 - 6\ yz\^2 + 4\ yy\ zz - zz\^2)\))\)\^2)\))\)^\((1/3)\))\), 
+      1\/12\ \((4\ \((xx + yy + 
+                  zz)\) - \((2\ \[ImaginaryI]\ 2\^\(1/3\)\ \
+\((\(-\[ImaginaryI]\) + \@3)\)\ \((xx\^2 + 3\ xy\^2 + 3\ xz\^2 + yy\^2 + 
+                      3\ yz\^2 - yy\ zz + zz\^2 - 
+                      xx\ \((yy + zz)\))\))\)/\((2\ xx\^3 - 18\ xz\^2\ yy + 
+                    2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                    9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                    3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                    3\ xx\^2\ \((yy + zz)\) - 
+                    3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                          4\ yy\ zz + 
+                          zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + \
+3\ xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\
+\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 9\ xy\^2\
+\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ \
+zz\^2 + 2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - \
+yy\^2 - 6\ yz\^2 + 4\ yy\ zz - zz\^2)\))\)\^2)\))\)^\((1/
+                    3)\) + \[ImaginaryI]\ 2\^\(2/3\)\ \((\[ImaginaryI] + \@3)\
+\)\ \((2\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                    9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                    3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                    3\ xx\^2\ \((yy + zz)\) - 
+                    3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                          4\ yy\ zz + 
+                          zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + \
+3\ xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\
+\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 9\ xy\^2\
+\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ \
+zz\^2 + 2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - \
+yy\^2 - 6\ yz\^2 + 4\ yy\ zz - zz\^2)\))\)\^2)\))\)^\((1/3)\))\), 
+      1\/12\ \((4\ \((xx + yy + 
+                  zz)\) + \((2\ \[ImaginaryI]\ 2\^\(1/3\)\ \((\[ImaginaryI] + \
+\@3)\)\ \((xx\^2 + 3\ xy\^2 + 3\ xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - 
+                      xx\ \((yy + zz)\))\))\)/\((2\ xx\^3 - 18\ xz\^2\ yy + 
+                    2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                    9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                    3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                    3\ xx\^2\ \((yy + zz)\) - 
+                    3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                          4\ yy\ zz + 
+                          zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + \
+3\ xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\
+\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 9\ xy\^2\
+\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ \
+zz\^2 + 2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - \
+yy\^2 - 6\ yz\^2 + 4\ yy\ zz - zz\^2)\))\)\^2)\))\)^\((1/3)\) - 
+            2\^\(2/3\)\ \((1 + \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 - 
+                    18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 
+                    9\ yy\ yz\^2 + 9\ xy\^2\ \((yy - 2\ zz)\) + 
+                    9\ xz\^2\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                    3\ yy\ zz\^2 + 2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) - 
+                    3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                          4\ yy\ zz + 
+                          zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + \
+3\ xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\
+\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 9\ xy\^2\
+\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ \
+zz\^2 + 2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - \
+yy\^2 - 6\ yz\^2 + 4\ yy\ zz - zz\^2)\))\)\^2)\))\)^\((1/3)\))\)}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(esys = Eigensystem[m];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(esys\)], "Input"],
+
+Cell[BoxData[
+    \({{1\/3\ \((xx + yy + 
+                zz)\) - \((2\^\(1/3\)\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + 
+                    xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - 
+                    zz\^2)\))\)/\((3\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                      9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                      18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                      54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                      3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                      12\ xx\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                      3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                      2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ \
+xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\
+\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\) + \(\(1\/\(3\ 2\^\(1/3\)\)\)\((\((2\ xx\^3 + 
+                  9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                  18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                  18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                  18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                  3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                  2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 \
++ xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ xx\^3 + 9\
+\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ \
+xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 3\ \
+xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 9\ \
+yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ zz\^3)\)\^2)\))\)^\((1/
+                  3)\))\)\), 
+        1\/3\ \((xx + yy + 
+                zz)\) + \((\((1 + \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\) - 
+                    3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + 
+                    xx\ zz + yy\ zz - 
+                    zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                      9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                      9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                      2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                      9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                      9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                      9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                      2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ \
+xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\
+\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                      3)\))\) - \(\(1\/\(6\ 2\^\(1/3\)\)\)\((\((1 - \
+\[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                    3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                    18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                    3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                    3\ yy\ zz\^2 + 
+                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ \
+xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\
+\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\), 
+        1\/3\ \((xx + yy + 
+                zz)\) + \((\((1 - \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\) - 
+                    3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + 
+                    xx\ zz + yy\ zz - 
+                    zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                      9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                      9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                      2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                      9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                      9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                      9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                      2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ \
+xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\
+\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                      3)\))\) - \(\(1\/\(6\ 2\^\(1/3\)\)\)\((\((1 + \
+\[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                    3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                    18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                    3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                    3\ yy\ zz\^2 + 
+                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ \
+xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\
+\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                    3)\))\)\)}, {{\(-\(\(1\/xz\)\((1\/3\ \((\(-xx\) - yy - 
+                        zz)\) + 
+                  zz + \((2\^\(1/3\)\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + 
+                            xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - 
+                            zz\^2)\))\)/\((3\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                              9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                              18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                              54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                              3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                              12\ xx\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                              3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                              2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ \
+xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 \
++ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - \
+18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ \
+yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\) - \(\(1\/\(3\ 2\^\(1/3\)\)\)\((\((2\ xx\^3 + 
+                          9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                          9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                          2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                          9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                          9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                          9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                          2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - \
+3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\
+\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\)\)\) + \((yz\ \((xz\ yz - 
+                      xy\ \((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                            zz + \((2\^\(1/3\)\ \((\(-xx\^2\) - 3\ xy\^2 - 
+                                      3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + 
+                                      xx\ zz + yy\ zz - 
+                                      zz\^2)\))\)/\((3\ \((2\ xx\^3 + 
+                                        9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                        3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                        18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                        2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                        18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                        3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                        9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                        3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                        3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                        2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) \
+- 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\) - \(\(1\/\(3\ 2\^\(1/3\)\)\)\((\((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\))\)/\((xz\ \((\(-xy\)\ yz + 
+                      xz\ \((yy + 
+                            1\/3\ \((\(-xx\) - yy - 
+                                  zz)\) + \((2\^\(1/3\)\ \((\(-xx\^2\) - 
+                                      3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 
+                                      3\ yz\^2 + xx\ zz + yy\ zz - 
+                                      zz\^2)\))\)/\((3\ \((2\ xx\^3 + 
+                                        9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                        3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                        18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                        2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                        18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                        3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                        9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                        3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                        3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                        2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) \
+- 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\) - \(\(1\/\(3\ 2\^\(1/3\)\)\)\((\((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\))\), \(-\(\((xz\ yz - 
+                  xy\ \((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                        zz + \((2\^\(1/3\)\ \((\(-xx\^2\) - 3\ xy\^2 - 
+                                  3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + 
+                                  xx\ zz + yy\ zz - 
+                                  zz\^2)\))\)/\((3\ \((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\) - \(\(1\/\(3\ 2\^\(1/3\)\)\)\((\((2\ xx\^3 + 
+                                9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                3\ yy\ zz\^2 + 
+                                2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\
+\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \
+\((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ \
+xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\)/\((\(-xy\)\ yz + 
+                  xz\ \((yy + 
+                        1\/3\ \((\(-xx\) - yy - 
+                              zz)\) + \((2\^\(1/3\)\ \((\(-xx\^2\) - 
+                                  3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 
+                                  3\ yz\^2 + xx\ zz + yy\ zz - 
+                                  zz\^2)\))\)/\((3\ \((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\) - \(\(1\/\(3\ 2\^\(1/3\)\)\)\((\((2\ xx\^3 + 
+                                9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                3\ yy\ zz\^2 + 
+                                2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\
+\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \
+\((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ \
+xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\)\)\), 
+          1}, {\(-\(\(1\/xz\)\((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                  zz - \((\((1 + \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\) - 
+                            3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + 
+                            xx\ zz + yy\ zz - 
+                            zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                              9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                              9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                              2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                              9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                              9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                              9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                              2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ \
+xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 \
++ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - \
+18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ \
+yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                              3)\))\) + \(\(1\/\(6\ 2\^\(1/3\)\)\)\((\((1 - \
+\[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                            3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                            3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                            18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                            18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                            3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                            3\ yy\ zz\^2 + 
+                            2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 \
+- 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\
+\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ \
+xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\)\)\) + \((yz\ \((xz\ yz - 
+                      xy\ \((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                            zz - \((\((1 + \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\
+\) - 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - 
+                                      zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                        18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                        2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                        18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                        3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                        9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                        3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                        3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                        2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) \
+- 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                        3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 - \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                      9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                      9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                      3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                      54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                      9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                      18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                      12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                      9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                      3\ yy\ zz\^2 + 
+                                      2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - \
+3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\))\)/\((xz\ \((\(-xy\)\ yz + 
+                      xz\ \((yy + 
+                            1\/3\ \((\(-xx\) - yy - 
+                                  
+                                  zz)\) - \((\((1 + \[ImaginaryI]\ \@3)\)\ \
+\((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + 
+                                      yy\ zz - 
+                                      zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                        18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                        2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                        18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                        3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                        9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                        3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                        3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                        2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) \
+- 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                        3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 - \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                      9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                      9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                      3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                      54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                      9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                      18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                      12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                      9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                      3\ yy\ zz\^2 + 
+                                      2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - \
+3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\))\), \(-\(\((xz\ yz - 
+                  xy\ \((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                        zz - \((\((1 + \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\) - 
+                                  3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 
+                                  3\ yz\^2 + xx\ zz + yy\ zz - 
+                                  zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                    3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 - \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                  9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                  9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                  3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                  18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                  3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                  9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                  3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                  3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                  2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ \
+xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 \
++ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - \
+18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ \
+yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\)/\((\(-xy\)\ yz + 
+                  xz\ \((yy + 
+                        1\/3\ \((\(-xx\) - yy - 
+                              zz)\) - \((\((1 + \[ImaginaryI]\ \@3)\)\ \
+\((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + 
+                                  yy\ zz - 
+                                  zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                    3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 - \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                  9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                  9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                  3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                  18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                  3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                  9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                  3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                  3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                  2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ \
+xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 \
++ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - \
+18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ \
+yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\)\)\), 
+          1}, {\(-\(\(1\/xz\)\((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                  zz - \((\((1 - \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\) - 
+                            3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + 
+                            xx\ zz + yy\ zz - 
+                            zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                              9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                              9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                              2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                              9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                              9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                              9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                              2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ \
+xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 \
++ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - \
+18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ \
+yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                              3)\))\) + \(\(1\/\(6\ 2\^\(1/3\)\)\)\((\((1 + \
+\[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                            3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                            3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                            18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                            18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                            3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                            3\ yy\ zz\^2 + 
+                            2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 \
+- 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\
+\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ \
+xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ \
+yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\)\)\) + \((yz\ \((xz\ yz - 
+                      xy\ \((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                            zz - \((\((1 - \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\
+\) - 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - 
+                                      zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                        18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                        2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                        18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                        3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                        9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                        3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                        3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                        2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) \
+- 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                        3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 + \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                      9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                      9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                      3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                      54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                      9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                      18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                      12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                      9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                      3\ yy\ zz\^2 + 
+                                      2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - \
+3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\))\)/\((xz\ \((\(-xy\)\ yz + 
+                      xz\ \((yy + 
+                            1\/3\ \((\(-xx\) - yy - 
+                                  zz)\) - \((\((1 - \[ImaginaryI]\ \@3)\)\ \
+\((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + 
+                                      yy\ zz - 
+                                      zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ \
+xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                        18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                                        2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                        18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                        3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                        9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                        3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                        3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                        2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) \
+- 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                        3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 + \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                      9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                      9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                      3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                      54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                      9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                      18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                      12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                      9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                      3\ yy\ zz\^2 + 
+                                      2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - \
+3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\))\), \(-\(\((xz\ yz - 
+                  xy\ \((1\/3\ \((\(-xx\) - yy - zz)\) + 
+                        zz - \((\((1 - \[ImaginaryI]\ \@3)\)\ \((\(-xx\^2\) - 
+                                  3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 
+                                  3\ yz\^2 + xx\ zz + yy\ zz - 
+                                  zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                    3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 + \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                  9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                  9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                  3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                  18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                  3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                  9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                  3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                  3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                  2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ \
+xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 \
++ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - \
+18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ \
+yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\)/\((\(-xy\)\ yz + 
+                  xz\ \((yy + 
+                        1\/3\ \((\(-xx\) - yy - 
+                              zz)\) - \((\((1 - \[ImaginaryI]\ \@3)\)\ \
+\((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + 
+                                  yy\ zz - 
+                                  zz\^2)\))\)/\((3\ 2\^\(2/3\)\ \((2\ xx\^3 + 
+                                    9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                                    3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                                    18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                                    54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                                    9\ yy\ yz\^2 - 3\ xx\^2\ zz - 
+                                    18\ xy\^2\ zz + 9\ xz\^2\ zz + 
+                                    12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                                    9\ yz\^2\ zz - 3\ xx\ zz\^2 - 
+                                    3\ yy\ zz\^2 + 
+                                    2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\
+\ xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - \
+zz\^2)\)\^3 + \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ \
+xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\
+\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\
+\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/
+                                    3)\))\) + \(\(1\/\(6\ \
+2\^\(1/3\)\)\)\((\((1 + \[ImaginaryI]\ \@3)\)\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                                  9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                                  9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                                  3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+                                  18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                                  3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                                  9\ xz\^2\ zz + 12\ xx\ yy\ zz - 
+                                  3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+                                  3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                                  2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ \
+xy\^2 - 3\ xz\^2 + xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 \
++ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - \
+18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ \
+yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ \
+yy\^2\ zz + 9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 2\ \
+zz\^3)\)\^2)\))\)^\((1/3)\))\)\))\))\)\)\), 1}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(CForm[esys]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(LinearSolve[m - IdentityMatrix[3]*x, {0, 0, 0}]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 0, 0}\)], "Output"]
+}, Open  ]],
+
+Cell["Solve characteristic polynomial of m-i*lambda (lambda = x):", \
+"Commentary"],
+
+Cell[BoxData[
+    \(Simplify[
+      Solve[Det[m - IdentityMatrix[3]*x] \[Equal] 0, {x}]]\)], "Input"],
+
+Cell[BoxData[
+    \(CForm[%]\)], "Input"],
+
+Cell[BoxData[
+    \(ev := {e1, e2, e3}\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Solve[m . ev \[Equal] x*ev, {e1, e2, e3}]\)], "Input"],
+
+Cell[BoxData[
+    \({}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RowReduce[m - IdentityMatrix[3]*x]\)], "Input"],
+
+Cell[BoxData[
+    \({{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SingularValues[m - IdentityMatrix[3]*x]\)], "Input"],
+
+Cell[BoxData[
+    \(SingularValues::"svdf" \(\(:\)\(\ \)\) 
+      "SingularValues has received a matrix with infinite precision."\)], \
+"Message"],
+
+Cell[BoxData[
+    \(SingularValues[{{\(-x\) + xx, xy, xz}, {xy, \(-x\) + yy, yz}, {xz, 
+          yz, \(-x\) + zz}}]\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Solve[m . ev \[Equal] x*ev, ev]\)], "Input"],
+
+Cell[BoxData[
+    \({{e1 \[Rule] 0, e2 \[Rule] 0, e3 \[Rule] 0}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(x*ev\)], "Input"],
+
+Cell[BoxData[
+    \({e1\ x, e2\ x, e3\ x}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(RowReduce[{{1, 2}, {3, 4}}]\)], "Input"],
+
+Cell[BoxData[
+    \({{1, 0}, {0, 1}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(sys := {{a, b, 
+          c}, {{e11, e12, e13}, {e21, e22, e23}, {e31, e32, e33}}}\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(sys[\([1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \({a, b, c}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(sys[\([2, 1, 3]\)]\)], "Input"],
+
+Cell[BoxData[
+    \(e13\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\({{a1, a2, a3}, {{v11, v12, v13}, {v21, v22, v23}, {v31, v32, v33}}} = 
+        esys;\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[a1]]\)], "Input"],
+
+Cell["\<\
+(2*(xx + yy + zz) + (2*Power(2,0.3333333333333333)*(Power(xx,2) + \
+3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + 3*Power(yz,2) - yy*zz + \
+Power(zz,2) - xx*(yy + zz)))/
+      Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz + \
+9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 
+        9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+     Power(2,0.6666666666666666)*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + \
+2*Power(yy,3) + 54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 
+        9*Power(xz,2)*zz - 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - \
+3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333))/6.\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[a2]]\)], "Input"],
+
+Cell["\<\
+(4*(xx + yy + zz) - (Complex(0,2)*Power(2,0.3333333333333333)*(Complex(0,-1) \
++ Sqrt(3))*
+        (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+      Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz + \
+9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 
+        9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+     Complex(0,1)*Power(2,0.6666666666666666)*(Complex(0,1) + Sqrt(3))*
+      Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz + \
+9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 
+        9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333))/12.\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[a3]]\)], "Input"],
+
+Cell["\<\
+(4*(xx + yy + zz) + (Complex(0,2)*Power(2,0.3333333333333333)*(Complex(0,1) + \
+Sqrt(3))*
+        (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+      Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz + \
+9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 
+        9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) - 
+     Power(2,0.6666666666666666)*(1 + \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+        9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - 3*Power(yy,2)*zz + \
+9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) \
+- 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333))/12.\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v11]]\)], "Input"],
+
+Cell["\<\
+(-6*zz + 2*(xx + yy + zz) + (2*Power(2,0.3333333333333333)*(Power(xx,2) + \
+3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + 3*Power(yz,2) - yy*zz + \
+Power(zz,2) - 
+          xx*(yy + zz)))/Power(2*Power(xx,3) - 18*Power(xz,2)*yy + \
+2*Power(yy,3) + 54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + \
+9*Power(xz,2)*zz - 
+        3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+     Power(2,0.6666666666666666)*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + \
+2*Power(yy,3) + 54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 
+        9*Power(xz,2)*zz - 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - \
+3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+        3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + 6*Power(yz,2) - \
+4*yy*zz + Power(zz,2)) + 
+        Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+          Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+            9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+            3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) \
++ 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+     (6*yz*(xz*yz - (xy*(6*zz - 2*(xx + yy + zz) - \
+(2*Power(2,0.3333333333333333)*
+                  (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) \
++ 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+                Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                  3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+                  3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                  Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                    Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                      3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) \
++ 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                      3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) - 
+               Power(2,0.6666666666666666)*Power(2*Power(xx,3) - \
+18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz + 9*yy*Power(yz,2) + \
+9*Power(xy,2)*(yy - 2*zz) + 
+                  9*Power(xz,2)*zz - 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - \
+3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+                  3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                  Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                    Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                      3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) \
++ 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                      3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/6.))/
+      (-(xy*yz) + (xz*(6*yy - 2*(xx + yy + zz) - \
+(2*Power(2,0.3333333333333333)*
+                (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+              Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+                3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) - 
+             Power(2,0.6666666666666666)*Power(2*Power(xx,3) - \
+18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz + 9*yy*Power(yz,2) + \
+9*Power(xy,2)*(yy - 2*zz) + 
+                9*Power(xz,2)*zz - 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - \
+3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+                3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/6.))/(6.*xz)\
+\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v12]]\)], "Input"],
+
+Cell["\<\
+(-(xz*yz) + (xy*(6*zz - 2*(xx + yy + zz) - (2*Power(2,0.3333333333333333)*
+             (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+           Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+             9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+             3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) - 
+          Power(2,0.6666666666666666)*Power(2*Power(xx,3) - 18*Power(xz,2)*yy \
++ 2*Power(yy,3) + 54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) \
++ 
+             9*Power(xz,2)*zz - 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - \
+3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+             3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/6.)/
+   (-(xy*yz) + (xz*(6*yy - 2*(xx + yy + zz) - (2*Power(2,0.3333333333333333)*
+             (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+           Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+             9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+             3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) - 
+          Power(2,0.6666666666666666)*Power(2*Power(xx,3) - 18*Power(xz,2)*yy \
++ 2*Power(yy,3) + 54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) \
++ 
+             9*Power(xz,2)*zz - 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - \
+3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+             3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/6.)\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v13]]\)], "Input"],
+
+Cell["1", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v21]]\)], "Input"],
+
+Cell["\<\
+-(12*zz - 4*(xx + yy + zz) + (2*Power(2,0.3333333333333333)*(1 + \
+Complex(0,1)*Sqrt(3))*
+          (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+        Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz \
++ 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 
+          9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+          3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) + \
+4*yy*zz - Power(zz,2)) + 
+          Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+            Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+              9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+              3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+       Power(2,0.6666666666666666)*(1 - \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+          9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - 3*Power(yy,2)*zz + \
+9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) \
++ 
+          3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) + \
+4*yy*zz - Power(zz,2)) + 
+          Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+            Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+              9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+              3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333))/(12.*xz) + 
+   (yz*(xz*yz - (xy*(12*zz - 4*(xx + yy + zz) + \
+(2*Power(2,0.3333333333333333)*(1 + Complex(0,1)*Sqrt(3))*
+                (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+              Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+             Power(2,0.6666666666666666)*(1 - \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+                9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+                3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.))/
+    (xz*(-(xy*yz) + (xz*(12*yy - 4*(xx + yy + zz) + \
+(2*Power(2,0.3333333333333333)*(1 + Complex(0,1)*Sqrt(3))*
+                (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+              Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+                3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+             Power(2,0.6666666666666666)*(1 - \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+                9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+                3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.))\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v22]]\)], "Input"],
+
+Cell["\<\
+(-(xz*yz) + (xy*(12*zz - 4*(xx + yy + zz) + (2*Power(2,0.3333333333333333)*(1 \
++ Complex(0,1)*Sqrt(3))*
+             (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+           Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+             9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+             3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+          Power(2,0.6666666666666666)*(1 - \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+             9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - 3*Power(yy,2)*zz \
++ 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + \
+zz) + 
+             3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.)/
+   (-(xy*yz) + (xz*(12*yy - 4*(xx + yy + zz) + \
+(2*Power(2,0.3333333333333333)*(1 + Complex(0,1)*Sqrt(3))*
+             (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+           Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+             9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+             3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+          Power(2,0.6666666666666666)*(1 - \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+             9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - 3*Power(yy,2)*zz \
++ 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + \
+zz) - 
+             3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.)\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v23]]\)], "Input"],
+
+Cell["1", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v31]]\)], "Input"],
+
+Cell["\<\
+-(12*zz - 4*(xx + yy + zz) + (2*Power(2,0.3333333333333333)*(1 - \
+Complex(0,1)*Sqrt(3))*
+          (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+        Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + 54*xy*xz*yz \
++ 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 
+          9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+          3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) + \
+4*yy*zz - Power(zz,2)) + 
+          Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+            Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+              9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+              3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+       Power(2,0.6666666666666666)*(1 + \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+          9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - 3*Power(yy,2)*zz + \
+9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) \
++ 
+          3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - 6*Power(yz,2) + \
+4*yy*zz - Power(zz,2)) + 
+          Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+            Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+              9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+              3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333))/(12.*xz) + 
+   (yz*(xz*yz - (xy*(12*zz - 4*(xx + yy + zz) + \
+(2*Power(2,0.3333333333333333)*(1 - Complex(0,1)*Sqrt(3))*
+                (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+              Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+             Power(2,0.6666666666666666)*(1 + \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+                9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+                3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.))/
+    (xz*(-(xy*yz) + (xz*(12*yy - 4*(xx + yy + zz) + \
+(2*Power(2,0.3333333333333333)*(1 - Complex(0,1)*Sqrt(3))*
+                (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+              Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) - 
+                3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+             Power(2,0.6666666666666666)*(1 + \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+                9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - \
+3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+                3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+                Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+                  Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                    3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                    3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.))\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v32]]\)], "Input"],
+
+Cell["\<\
+(-(xz*yz) + (xy*(12*zz - 4*(xx + yy + zz) + (2*Power(2,0.3333333333333333)*(1 \
+- Complex(0,1)*Sqrt(3))*
+             (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+           Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+             9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) + 
+             3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+          Power(2,0.6666666666666666)*(1 + \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+             9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - 3*Power(yy,2)*zz \
++ 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + \
+zz) + 
+             3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.)/
+   (-(xy*yz) + (xz*(12*yy - 4*(xx + yy + zz) + \
+(2*Power(2,0.3333333333333333)*(1 - Complex(0,1)*Sqrt(3))*
+             (Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + Power(yy,2) + \
+3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz)))/
+           Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 3*Power(yy,2)*zz + 
+             9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - \
+3*Power(xx,2)*(yy + zz) - 
+             3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333) + 
+          Power(2,0.6666666666666666)*(1 + \
+Complex(0,1)*Sqrt(3))*Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) \
++ 54*xy*xz*yz + 9*yy*Power(yz,2) + 
+             9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz - 3*Power(yy,2)*zz \
++ 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + 2*Power(zz,3) - 3*Power(xx,2)*(yy + \
+zz) - 
+             3*xx*(-3*Power(xy,2) - 3*Power(xz,2) + Power(yy,2) + \
+6*Power(yz,2) - 4*yy*zz + Power(zz,2)) + 
+             Sqrt(-4*Power(Power(xx,2) + 3*Power(xy,2) + 3*Power(xz,2) + \
+Power(yy,2) + 3*Power(yz,2) - yy*zz + Power(zz,2) - xx*(yy + zz),3) + 
+               Power(2*Power(xx,3) - 18*Power(xz,2)*yy + 2*Power(yy,3) + \
+54*xy*xz*yz + 9*yy*Power(yz,2) + 9*Power(xy,2)*(yy - 2*zz) + 9*Power(xz,2)*zz \
+- 
+                 3*Power(yy,2)*zz + 9*Power(yz,2)*zz - 3*yy*Power(zz,2) + \
+2*Power(zz,3) - 3*Power(xx,2)*(yy + zz) + 
+                 3*xx*(3*Power(xy,2) + 3*Power(xz,2) - Power(yy,2) - \
+6*Power(yz,2) + 4*yy*zz - Power(zz,2)),2)),0.3333333333333333)))/12.)\
+\>", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(CForm[Simplify[v33]]\)], "Input"],
+
+Cell["1", "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(a1\)], "Input"],
+
+Cell[BoxData[
+    \(1\/3\ \((xx + yy + 
+            zz)\) - \((2\^\(1/3\)\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + 
+                xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - 
+                zz\^2)\))\)/\((3\ \((2\ xx\^3 + 9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 
+                  3\ xx\^2\ yy + 9\ xy\^2\ yy - 18\ xz\^2\ yy - 
+                  3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                  9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                  9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                  9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                  2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 \
++ xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ xx\^3 + 
+                              9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                              9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                              2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                              9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                              9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                              9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                              2\ zz\^3)\)^2)\))\)^\((1/
+                  3)\))\) + \(\(1\/\(3\ 2\^\(1/3\)\)\)\((\((2\ xx\^3 + 
+              9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+              18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 54\ xy\ xz\ yz - 
+              18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+              9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 9\ yz\^2\ zz - 
+              3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+              2\ zz\^3 + \[Sqrt]\((4\ \((\(-xx\^2\) - 3\ xy\^2 - 3\ xz\^2 + \
+xx\ yy - yy\^2 - 3\ yz\^2 + xx\ zz + yy\ zz - zz\^2)\)\^3 + \((2\ xx\^3 + 
+                          9\ xx\ xy\^2 + 9\ xx\ xz\^2 - 3\ xx\^2\ yy + 
+                          9\ xy\^2\ yy - 18\ xz\^2\ yy - 3\ xx\ yy\^2 + 
+                          2\ yy\^3 + 54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 
+                          9\ yy\ yz\^2 - 3\ xx\^2\ zz - 18\ xy\^2\ zz + 
+                          9\ xz\^2\ zz + 12\ xx\ yy\ zz - 3\ yy\^2\ zz + 
+                          9\ yz\^2\ zz - 3\ xx\ zz\^2 - 3\ yy\ zz\^2 + 
+                          2\ zz\^3)\)^2)\))\)^\((1/3)\))\)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[a1]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/6\ \((2\ \((xx + yy + 
+                zz)\) + \((2\ 2\^\(1/3\)\ \((xx\^2 + 3\ xy\^2 + 3\ xz\^2 + 
+                    yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - 
+                    xx\ \((yy + zz)\))\))\)/\((2\ xx\^3 - 18\ xz\^2\ yy + 
+                  2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                  9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 
+                  9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                  3\ xx\^2\ \((yy + zz)\) - 
+                  3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                        4\ yy\ zz + 
+                        zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + 3\ \
+xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\ \
+xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                              9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                              3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 
+                              2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 
+                              3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - yy\^2 - 
+                                    6\ yz\^2 + 4\ yy\ zz - 
+                                    zz\^2)\))\)^2)\))\)^\((1/3)\) + 
+          2\^\(2/3\)\ \((2\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 
+                  54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                  9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 
+                  9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                  3\ xx\^2\ \((yy + zz)\) - 
+                  3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                        4\ yy\ zz + 
+                        zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + 3\ \
+xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\ \
+xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                              9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                              3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 
+                              2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 
+                              3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - yy\^2 - 
+                                    6\ yz\^2 + 4\ yy\ zz - 
+                                    zz\^2)\))\)^2)\))\)^\((1/
+                  3)\))\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FullSimplify[a1]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/6\ \((2\ \((xx + yy + 
+                zz)\) + \((2\ 2\^\(1/3\)\ \((xx\^2 + yy\^2 + 
+                    3\ \((xy\^2 + xz\^2 + yz\^2)\) - yy\ zz + zz\^2 - 
+                    xx\ \((yy + zz)\))\))\)/\((2\ xx\^3 - 18\ xz\^2\ yy + 
+                  2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                  9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 
+                  9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                  3\ xx\^2\ \((yy + zz)\) - 
+                  3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                        4\ yy\ zz + 
+                        zz\^2)\) + \[Sqrt]\((\((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                              9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                              18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                              54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                              3\ \((xx\^2 + 6\ xy\^2 - 4\ xx\ yy + yy\^2 - 
+                                    3\ \((xz\^2 + yz\^2)\))\)\ zz - 
+                              3\ \((xx + yy)\)\ zz\^2 + 2\ zz\^3)\)^2 - 
+                        4\ \((xx\^2 + yy\^2 + 3\ \((xy\^2 + xz\^2 + yz\^2)\) \
+- yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3)\))\)^\((1/3)\) + 
+          2\^\(2/3\)\ \((2\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 
+                  54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                  9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 
+                  9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                  3\ xx\^2\ \((yy + zz)\) - 
+                  3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                        4\ yy\ zz + 
+                        zz\^2)\) + \[Sqrt]\((\((2\ xx\^3 + 9\ xx\ xy\^2 + 
+                              9\ xx\ xz\^2 - 3\ xx\^2\ yy + 9\ xy\^2\ yy - 
+                              18\ xz\^2\ yy - 3\ xx\ yy\^2 + 2\ yy\^3 + 
+                              54\ xy\ xz\ yz - 18\ xx\ yz\^2 + 9\ yy\ yz\^2 - 
+                              3\ \((xx\^2 + 6\ xy\^2 - 4\ xx\ yy + yy\^2 - 
+                                    3\ \((xz\^2 + yz\^2)\))\)\ zz - 
+                              3\ \((xx + yy)\)\ zz\^2 + 2\ zz\^3)\)^2 - 
+                        4\ \((xx\^2 + yy\^2 + 3\ \((xy\^2 + xz\^2 + yz\^2)\) \
+- yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3)\))\)^\((1/3)\))\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[a2]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/12\ \((4\ \((xx + yy + 
+                zz)\) - \((2\ \[ImaginaryI]\ 2\^\(1/3\)\ \
+\((\(-\[ImaginaryI]\) + \@3)\)\ \((xx\^2 + 3\ xy\^2 + 3\ xz\^2 + yy\^2 + 
+                    3\ yz\^2 - yy\ zz + zz\^2 - 
+                    xx\ \((yy + zz)\))\))\)/\((2\ xx\^3 - 18\ xz\^2\ yy + 
+                  2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                  9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 
+                  9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                  3\ xx\^2\ \((yy + zz)\) - 
+                  3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                        4\ yy\ zz + 
+                        zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + 3\ \
+xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\ \
+xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                              9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                              3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 
+                              2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 
+                              3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - yy\^2 - 
+                                    6\ yz\^2 + 4\ yy\ zz - 
+                                    zz\^2)\))\)^2)\))\)^\((1/
+                  3)\) + \[ImaginaryI]\ 2\^\(2/3\)\ \((\[ImaginaryI] + \@3)\)\
+\ \((2\ xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                  9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 3\ yy\^2\ zz + 
+                  9\ yz\^2\ zz - 3\ yy\ zz\^2 + 2\ zz\^3 - 
+                  3\ xx\^2\ \((yy + zz)\) - 
+                  3\ xx\ \((\(-3\)\ xy\^2 - 3\ xz\^2 + yy\^2 + 6\ yz\^2 - 
+                        4\ yy\ zz + 
+                        zz\^2)\) + \[Sqrt]\((\(-4\)\ \((xx\^2 + 3\ xy\^2 + 3\ \
+xz\^2 + yy\^2 + 3\ yz\^2 - yy\ zz + zz\^2 - xx\ \((yy + zz)\))\)\^3 + \((2\ \
+xx\^3 - 18\ xz\^2\ yy + 2\ yy\^3 + 54\ xy\ xz\ yz + 9\ yy\ yz\^2 + 
+                              9\ xy\^2\ \((yy - 2\ zz)\) + 9\ xz\^2\ zz - 
+                              3\ yy\^2\ zz + 9\ yz\^2\ zz - 3\ yy\ zz\^2 + 
+                              2\ zz\^3 - 3\ xx\^2\ \((yy + zz)\) + 
+                              3\ xx\ \((3\ xy\^2 + 3\ xz\^2 - yy\^2 - 
+                                    6\ yz\^2 + 4\ yy\ zz - 
+                                    zz\^2)\))\)^2)\))\)^\((1/
+                  3)\))\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FullSimplify[a2]\)], "Input"],
+
+Cell[BoxData[
+    \($Aborted\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1600}, {0, 1124}},
+WindowSize->{1296, 740},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->1.25,
+StyleDefinitions -> "Report.nb"
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1739, 51, 67, 1, 43, "Input"],
+Cell[1809, 54, 78, 1, 77, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[1924, 60, 62, 1, 43, "Input"],
+Cell[1989, 63, 159, 2, 77, "Output"]
+}, Open  ]],
+Cell[2163, 68, 55, 0, 28, "Commentary"],
+Cell[2221, 70, 80, 1, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[2326, 75, 57, 1, 43, "Input"],
+Cell[2386, 78, 6019, 88, 575, "Output"]
+}, Open  ]],
+Cell[8420, 169, 59, 1, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[8504, 174, 37, 1, 43, "Input"],
+Cell[8544, 177, 44814, 645, 3633, "Output"]
+}, Open  ]],
+Cell[53373, 825, 44, 1, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[53442, 830, 80, 1, 43, "Input"],
+Cell[53525, 833, 43, 1, 61, "Output"]
+}, Open  ]],
+Cell[53583, 837, 83, 1, 28, "Commentary"],
+Cell[53669, 840, 101, 2, 43, "Input"],
+Cell[53773, 844, 41, 1, 43, "Input"],
+Cell[53817, 847, 51, 1, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[53893, 852, 74, 1, 43, "Input"],
+Cell[53970, 855, 36, 1, 61, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[54043, 861, 67, 1, 43, "Input"],
+Cell[54113, 864, 67, 1, 61, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[54217, 870, 72, 1, 43, "Input"],
+Cell[54292, 873, 146, 3, 37, "Message"],
+Cell[54441, 878, 130, 2, 61, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[54608, 885, 64, 1, 43, "Input"],
+Cell[54675, 888, 78, 1, 61, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[54790, 894, 37, 1, 43, "Input"],
+Cell[54830, 897, 55, 1, 61, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[54922, 903, 60, 1, 43, "Input"],
+Cell[54985, 906, 50, 1, 61, "Output"]
+}, Open  ]],
+Cell[55050, 910, 115, 2, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[55190, 916, 45, 1, 43, "Input"],
+Cell[55238, 919, 43, 1, 61, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[55318, 925, 51, 1, 43, "Input"],
+Cell[55372, 928, 37, 1, 61, "Output"]
+}, Open  ]],
+Cell[55424, 932, 121, 2, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[55570, 938, 52, 1, 43, "Input"],
+Cell[55625, 941, 2029, 35, 377, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[57691, 981, 52, 1, 43, "Input"],
+Cell[57746, 984, 2123, 38, 420, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[59906, 1027, 52, 1, 43, "Input"],
+Cell[59961, 1030, 2106, 38, 398, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[62104, 1073, 53, 1, 43, "Input"],
+Cell[62160, 1076, 6417, 108, 1057, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[68614, 1189, 53, 1, 43, "Input"],
+Cell[68670, 1192, 4253, 71, 738, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[72960, 1268, 53, 1, 43, "Input"],
+Cell[73016, 1271, 19, 0, 80, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[73072, 1276, 53, 1, 43, "Input"],
+Cell[73128, 1279, 6591, 112, 1121, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[79756, 1396, 53, 1, 43, "Input"],
+Cell[79812, 1399, 4373, 75, 738, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[84222, 1479, 53, 1, 43, "Input"],
+Cell[84278, 1482, 19, 0, 80, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[84334, 1487, 53, 1, 43, "Input"],
+Cell[84390, 1490, 6591, 112, 1121, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[91018, 1607, 53, 1, 43, "Input"],
+Cell[91074, 1610, 4373, 75, 1009, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[95484, 1690, 53, 1, 41, "Input"],
+Cell[95540, 1693, 19, 0, 78, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[95596, 1698, 35, 1, 41, "Input"],
+Cell[95634, 1701, 2348, 33, 274, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[98019, 1739, 45, 1, 41, "Input"],
+Cell[98067, 1742, 2343, 36, 261, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[100447, 1783, 49, 1, 41, "Input"],
+Cell[100499, 1786, 2358, 35, 261, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[102894, 1826, 45, 1, 41, "Input"],
+Cell[102942, 1829, 2426, 37, 265, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[105405, 1871, 49, 1, 41, "Input"],
+Cell[105457, 1874, 42, 1, 60, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

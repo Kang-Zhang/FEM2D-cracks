@@ -1,0 +1,47 @@
+
+L10	- relax_local
+L15	- relax_global
+L20	- refine mesh
+	- if something refined goto L10
+L50	- count fracture candidates
+	- if count == 0
+		- progressive_save()
+		- if simulation done, return 1
+		- t0 = t
+		- dt = dt * 2
+		- t = t + dt
+		- goto L60
+	- else if count > 1
+		- if t == t0
+			goto L70
+		- t = t0 + dt_min
+		- dt = dt_min
+		- goto L60
+	- else if count == 1
+		- goto L70
+L60	- grow to time t
+	- goto L10
+L70	- fracture
+	- if nothing fractured
+		- warning - nothing was fractured
+		- t = t + dt_min
+		- goto L60
+	- else goto L10
+		
+
+
+LOOP:
+-----
+
+	
+
+	- grow
+	- loop:
+		- relax the model
+		- refine the model
+		- if nothing was refined, break
+	- fracture()
+	- if something was fractured, refined, or anything requiring
+	  relaxation, continue at the begging of the main loop
+	- determine next time
+	

@@ -1,0 +1,52 @@
+How to determine time step adaptively:
+
+-problem: advance time as quickly as possible to the next simulation time,
+          where the number of fractures will be exactly 1
+
+Method to determine the next time:
+- assume we have a time step t0 where we know the number of fractures was 0,
+  i.e. nf(t0) = 0
+  For example, at the beginning of the simulation such time is t0=0
+  (representing no growth yet)
+- also, assume we have an initial time step 'dt'
+
+- first we need to determine the first time 'tmax' where n_fracture > 0:
+  - loop
+    - tmax = t0 + dt
+    - if nf(tmax) == 0
+      - dt = dt * 2
+      - t0 = tmax
+    - else
+      - break // we are done
+  - if nf(tmax) == 1 // we actually have a perfect fit
+
+- now we try to determine time 't' somewhere between t0 and tmax where
+  nf(t) = 1:
+
+  - loop
+    - if tmax - t0 < min_time_step then
+      - t = tmax
+      - dt = min_time_step
+      - break
+    - t = (tmax + t0) / 2
+    - if nf(t) == 0
+      - t0 = t
+      - continue
+    - if nf(t) > 1
+      - tmax = t
+      - continue
+    // we have a perfect fit in 't'
+    dt = t - t0
+    if( dt < min_time_step) dt = min_time_step
+    break
+
+- now we have either nf(t) = 1 or dt = min_time_step
+
+How do we implement nf(t)?
+
+  - grow the model to time t
+  - refine the model
+  - count the number of places where pstress > yield_stress and return
+    the count
+
+

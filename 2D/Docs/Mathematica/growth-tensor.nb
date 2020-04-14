@@ -1,0 +1,383 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8757,        272]*)
+(*NotebookOutlinePosition[      9414,        295]*)
+(*  CellTagsIndexPosition[      9370,        291]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(Normalize[v_] := v*\((v . v)\)^\((\(-1\)/2)\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[{{r, 0, 0}, {0, r, 0}, {0, 0, 0}}]\)], "Input"],
+
+Cell[BoxData[
+    \({{0, r, r}, {{0, 0, 1}, {0, 1, 0}, {1, 0, 0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[{{r1*Cos[a] + r2*Cos[a + Pi/2], 0, 0}, {0, 
+          r1*Sin[a] + r2*Sin[a + Pi/2], 0}, {0, 0, 0}}]\)], "Input"],
+
+Cell[BoxData[
+    \({{0, r2\ Cos[a] + r1\ Sin[a], 
+        r1\ Cos[a] - r2\ Sin[a]}, {{0, 0, 1}, {0, 1, 0}, {1, 0, 
+          0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[Cos[x + Pi/2]]\)], "Input"],
+
+Cell[BoxData[
+    \(\(-Sin[x]\)\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(GT[r1_, r2_, u1x_, 
+        u1y_] := {{r1*u1x*u1x + r2*u1y*u1y, r1*u1y*u1x - r2*u1x*u1y, 
+          0}, \[IndentingNewLine]{r1*u1x*u1y - r2*u1y*u1x, 
+          r1*u1y*u1y + r2*u1x*u1x, 0}, \[IndentingNewLine]{0, 0, 
+          0}}\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(GT[r1, r2, u1x, u1y] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{r1\ u1x\^2 + r2\ u1y\^2, \((r1 - r2)\)\ u1x\ u1y, 
+        0}, {\((r1 - r2)\)\ u1x\ u1y, r2\ u1x\^2 + r1\ u1y\^2, 0}, {0, 0, 
+        0}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(GT[r1, r2, u1x, u1y] // FullSimplify\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(GT[r, r, ux1, Sqrt[1 - ux1^2]] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{r, 0, 0}, {0, r, 0}, {0, 0, 0}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[GT[r1, 0, u1x, Sqrt[1 - u1x^2]]] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{0, 0, 
+        r1}, {{0, 0, 1}, {\(-\(\@\(1 - u1x\^2\)\/u1x\)\), 1, 
+          0}, {u1x\/\@\(1 - u1x\^2\), 1, 0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[GT[r1, r2, Cos[a], Sin[a]]] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{0, r1, 
+        r2}, {{0, 0, 1}, {Cot[a], 1, 0}, {\(-Tan[a]\), 1, 0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[GT[r1, r2, u1x, u1y]] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{0, r1\ \((u1x\^2 + u1y\^2)\), 
+        r2\ \((u1x\^2 + u1y\^2)\)}, {{0, 0, 1}, {u1x\/u1y, 1, 
+          0}, {\(-\(u1y\/u1x\)\), 1, 0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[GT[r1, r1, u1x, u1y]] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{0, r1\ \((u1x\^2 + u1y\^2)\), 
+        r1\ \((u1x\^2 + u1y\^2)\)}, {{0, 0, 1}, {1, 0, 0}, {0, 0, 
+          0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[{{r1*u1x*u1x + r2*u1y*u1y, r1*u1y*u1x + r2*u1x*u1y, 
+            0}, \[IndentingNewLine]{r1*u1x*u1y - r2*u1y*u1x, 
+            r1*u1y*u1y + r2*u1x*u1x, 0}, \[IndentingNewLine]{0, 0, 0}}] // 
+      FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{0, 
+        1\/2\ \((\((r1 + r2)\)\ \((u1x\^2 + 
+                    u1y\^2)\) - \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + \
+u1y\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                          r1\ \((u1x\^4 + u1y\^4)\))\))\))\), 
+        1\/2\ \((\((r1 + r2)\)\ \((u1x\^2 + 
+                    u1y\^2)\) + \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + \
+u1y\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                          r1\ \((u1x\^4 + u1y\^4)\))\))\))\)}, {{0, 0, 
+          1}, {\((\((r1 - r2)\)\ \((u1x - u1y)\)\ \((u1x + 
+                      u1y)\) - \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + \
+u1y\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                            r1\ \((u1x\^4 + u1y\^4)\))\))\))\)/\((2\ \((r1 - 
+                    r2)\)\ u1x\ u1y)\), 1, 
+          0}, {\((\((r1 - r2)\)\ \((u1x - u1y)\)\ \((u1x + 
+                      u1y)\) + \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + \
+u1y\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                            r1\ \((u1x\^4 + u1y\^4)\))\))\))\)/\((2\ \((r1 - 
+                    r2)\)\ u1x\ u1y)\), 1, 0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(f[u1x_, u1y_, r1_, 
+        r2_] := {{0, 
+          1\/2\ \((\((r1 + r2)\)\ \((u1x\^2 + 
+                      u1y\^2)\) - \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + u1y\
+\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                            r1\ \((u1x\^4 + u1y\^4)\))\))\))\), 
+          1\/2\ \((\((r1 + r2)\)\ \((u1x\^2 + 
+                      u1y\^2)\) + \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + u1y\
+\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                            r1\ \((u1x\^4 + u1y\^4)\))\))\))\)}, {{0, 0, 
+            1}, {\((\((r1 - r2)\)\ \((u1x - u1y)\)\ \((u1x + 
+                        u1y)\) - \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + \
+u1y\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                              r1\ \((u1x\^4 + 
+                                    u1y\^4)\))\))\))\)/\((2\ \((r1 - 
+                      r2)\)\ u1x\ u1y)\), 1, 
+            0}, {\((\((r1 - r2)\)\ \((u1x - u1y)\)\ \((u1x + 
+                        u1y)\) + \[Sqrt]\((\((r1 + r2)\)\^2\ \((u1x\^2 + \
+u1y\^2)\)\^2 - 4\ r2\ \((2\ r2\ u1x\^2\ u1y\^2 + 
+                              r1\ \((u1x\^4 + 
+                                    u1y\^4)\))\))\))\)/\((2\ \((r1 - 
+                      r2)\)\ u1x\ u1y)\), 1, 0}}}\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f[a, b, r1, r1] // FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    \(Power::"infy" \(\(:\)\(\ \)\) 
+      "Infinite expression \!\(1\/0\) encountered."\)], "Message"],
+
+Cell[BoxData[
+    RowBox[{"{", 
+      RowBox[{\({0, \((a\^2 + b\^2)\)\ r1, \((a\^2 + b\^2)\)\ r1}\), ",", 
+        RowBox[{"{", 
+          RowBox[{\({0, 0, 1}\), ",", 
+            RowBox[{"{", 
+              RowBox[{
+                InterpretationBox["ComplexInfinity",
+                  DirectedInfinity[ ]], ",", "1", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+              RowBox[{
+                InterpretationBox["ComplexInfinity",
+                  DirectedInfinity[ ]], ",", "1", ",", "0"}], "}"}]}], 
+          "}"}]}], "}"}]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Eigensystem[{{r1*u1x*u1x + r1*u1y*u1y, r1*u1y*u1x + r1*u1x*u1y, 
+            0}, \[IndentingNewLine]{r1*u1x*u1y - r1*u1y*u1x, 
+            r1*u1y*u1y + r1*u1x*u1x, 0}, \[IndentingNewLine]{0, 0, 0}}] // 
+      FullSimplify\)], "Input"],
+
+Cell[BoxData[
+    \({{0, r1\ \((u1x\^2 + u1y\^2)\), 
+        r1\ \((u1x\^2 + u1y\^2)\)}, {{0, 0, 1}, {1, 0, 0}, {0, 0, 
+          0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(D[r1*\((x*u1x + y*u1y)\)*u1x + r2*\((x*u1y - y*u1x)\)*u1y, 
+      z]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(D[r1*\((x*u1x + y*u1y)\)*u1y - r2*\((x*u1y - y*u1x)\)*u1x, 
+      x]\)], "Input"],
+
+Cell[BoxData[
+    \(r1\ u1x\ u1y - r2\ u1x\ u1y\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1600}, {0, 1124}},
+WindowSize->{1190, 740},
+WindowMargins->{{26, Automatic}, {Automatic, 33}}
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1717, 49, 78, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[1820, 54, 79, 1, 30, "Input"],
+Cell[1902, 57, 80, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2019, 63, 144, 2, 30, "Input"],
+Cell[2166, 67, 144, 3, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2347, 75, 56, 1, 30, "Input"],
+Cell[2406, 78, 45, 1, 29, "Output"]
+}, Open  ]],
+Cell[2466, 82, 262, 5, 70, "Input"],
+
+Cell[CellGroupData[{
+Cell[2753, 91, 69, 1, 30, "Input"],
+Cell[2825, 94, 173, 3, 29, "Output"]
+}, Open  ]],
+Cell[3013, 100, 69, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[3107, 105, 79, 1, 30, "Input"],
+Cell[3189, 108, 67, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3293, 114, 93, 1, 30, "Input"],
+Cell[3389, 117, 150, 3, 51, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3576, 125, 88, 1, 30, "Input"],
+Cell[3667, 128, 106, 2, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3810, 135, 82, 1, 30, "Input"],
+Cell[3895, 138, 171, 3, 44, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4103, 146, 82, 1, 30, "Input"],
+Cell[4188, 149, 148, 3, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4373, 157, 254, 4, 70, "Input"],
+Cell[4630, 163, 1126, 19, 123, "Output"]
+}, Open  ]],
+Cell[5771, 185, 1263, 22, 141, "Input"],
+
+Cell[CellGroupData[{
+Cell[7059, 211, 64, 1, 30, "Input"],
+Cell[7126, 214, 117, 2, 36, "Message"],
+Cell[7246, 218, 117, 2, 36, "Message"],
+Cell[7366, 222, 555, 13, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7958, 240, 254, 4, 70, "Input"],
+Cell[8215, 246, 148, 3, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8400, 254, 101, 2, 30, "Input"],
+Cell[8504, 258, 35, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8576, 264, 101, 2, 30, "Input"],
+Cell[8680, 268, 61, 1, 29, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+

@@ -1,0 +1,2278 @@
+(***********************************************************************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used on any computer system with Mathematica 4.0,
+MathReader 4.0, or any compatible application. The data for the notebook 
+starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do one of 
+the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing the 
+word CacheID, otherwise Mathematica-compatible applications may try to 
+use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+***********************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     71811,       1842]*)
+(*NotebookOutlinePosition[     72501,       1866]*)
+(*  CellTagsIndexPosition[     72457,       1862]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Define FEM matrices for a single element", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Define shape functions:", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Na[e_, n_, s_] = \((1/2)\)*
+          e*\((1 - s)\);\)\), "\[IndentingNewLine]", 
+    \(\(Nb[e_, n_, s_] = \((1/2)\)*
+          n*\((1 - s)\);\)\), "\[IndentingNewLine]", 
+    \(\(Nc[e_, n_, 
+          s_] = \((1/2)\)*\((1 - e - n)\)*\((1 - 
+              s)\);\)\), "\[IndentingNewLine]", 
+    \(\(Nd[e_, n_, s_] = \((1/2)\)*
+          e*\((1 + s)\);\)\), "\[IndentingNewLine]", 
+    \(\(Ne[e_, n_, s_] = \((1/2)\)*
+          n*\((1 + s)\);\)\), "\[IndentingNewLine]", 
+    \(\(Nf[e_, n_, s_] = \((1/2)\)*\((1 - e - n)\)*\((1 + s)\);\)\)}], "Input",\
+
+  CellLabel->"In[140]:="],
+
+Cell[CellGroupData[{
+
+Cell["Sum check (the sum of shape functions at any point is 0):", \
+"Subsubsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[
+      Na[e, n, s] + Nb[e, n, s] + Nc[e, n, s] + Nd[e, n, s] + Ne[e, n, s] + 
+        Nf[e, n, s]]\)], "Input",
+  CellLabel->"In[146]:="],
+
+Cell[BoxData[
+    \(1\)], "Output",
+  CellLabel->"Out[146]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define shape function derivatives:", "Subsection"],
+
+Cell[BoxData[{
+    \(\(Nae[e_, n_, s_] = D[Na[e, n, s], e];\)\), "\[IndentingNewLine]", 
+    \(\(Nbe[e_, n_, s_] = D[Nb[e, n, s], e];\)\), "\[IndentingNewLine]", 
+    \(\(Nce[e_, n_, s_] = D[Nc[e, n, s], e];\)\), "\[IndentingNewLine]", 
+    \(\(Nde[e_, n_, s_] = D[Nd[e, n, s], e];\)\), "\[IndentingNewLine]", 
+    \(\(Nee[e_, n_, s_] = D[Ne[e, n, s], e];\)\), "\[IndentingNewLine]", 
+    \(\(Nfe[e_, n_, s_] = 
+        D[Nf[e, n, s], e];\)\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(Nan[e_, n_, s_] = D[Na[e, n, s], n];\)\), "\[IndentingNewLine]", 
+    \(\(Nbn[e_, n_, s_] = D[Nb[e, n, s], n];\)\), "\[IndentingNewLine]", 
+    \(\(Ncn[e_, n_, s_] = D[Nc[e, n, s], n];\)\), "\[IndentingNewLine]", 
+    \(\(Ndn[e_, n_, s_] = D[Nd[e, n, s], n];\)\), "\[IndentingNewLine]", 
+    \(\(Nen[e_, n_, s_] = D[Ne[e, n, s], n];\)\), "\[IndentingNewLine]", 
+    \(\(Nfn[e_, n_, s_] = 
+        D[Nf[e, n, s], n];\)\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(Nas[e_, n_, s_] = D[Na[e, n, s], s];\)\), "\[IndentingNewLine]", 
+    \(\(Nbs[e_, n_, s_] = D[Nb[e, n, s], s];\)\), "\[IndentingNewLine]", 
+    \(\(Ncs[e_, n_, s_] = D[Nc[e, n, s], s];\)\), "\[IndentingNewLine]", 
+    \(\(Nds[e_, n_, s_] = D[Nd[e, n, s], s];\)\), "\[IndentingNewLine]", 
+    \(\(Nes[e_, n_, s_] = D[Ne[e, n, s], s];\)\), "\[IndentingNewLine]", 
+    \(\(Nfs[e_, n_, s_] = D[Nf[e, n, s], s];\)\)}], "Input",
+  CellLabel->"In[147]:="],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Sum check - to make sure that rigid body movements do not produce stress:\
+\>", "Subsubsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Simplify[
+      Nae[e, n, s] + Nbe[e, n, s] + Nce[e, n, s] + Nde[e, n, s] + 
+        Nee[e, n, s] + Nfe[e, n, s]]\), "\[IndentingNewLine]", 
+    \(Simplify[
+      Nan[e, n, s] + Nbn[e, n, s] + Ncn[e, n, s] + Ndn[e, n, s] + 
+        Nen[e, n, s] + Nfn[e, n, s]]\), "\[IndentingNewLine]", 
+    \(Simplify[
+      Nas[e, n, s] + Nbs[e, n, s] + Ncs[e, n, s] + Nds[e, n, s] + 
+        Nes[e, n, s] + Nfs[e, n, s]]\)}], "Input",
+  CellLabel->"In[165]:="],
+
+Cell[BoxData[
+    \(0\)], "Output",
+  CellLabel->"Out[165]="],
+
+Cell[BoxData[
+    \(0\)], "Output",
+  CellLabel->"Out[166]="],
+
+Cell[BoxData[
+    \(0\)], "Output",
+  CellLabel->"Out[167]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Define Nens(e,n,s) - the 3x6 matrix containing all shape function derivatives\
+\
+\>", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Nens[e_, n_, 
+        s_] = {\[IndentingNewLine]\t{Nae[e, n, s], Nbe[e, n, s], 
+          Nce[e, n, s], Nde[e, n, s], Nee[e, n, s], 
+          Nfe[e, n, s]}, \[IndentingNewLine]\t{Nan[e, n, s], Nbn[e, n, s], 
+          Ncn[e, n, s], Ndn[e, n, s], Nen[e, n, s], 
+          Nfn[e, n, s]}, \[IndentingNewLine]\t{Nas[e, n, s], Nbs[e, n, s], 
+          Ncs[e, n, s], Nds[e, n, s], Nes[e, n, s], Nfs[e, n, s]}}\)], "Input",\
+
+  CellLabel->"In[168]:="],
+
+Cell[BoxData[
+    \({{\(1 - s\)\/2, 0, 1\/2\ \((\(-1\) + s)\), \(1 + s\)\/2, 0, 
+        1\/2\ \((\(-1\) - s)\)}, {0, \(1 - s\)\/2, 1\/2\ \((\(-1\) + s)\), 
+        0, \(1 + s\)\/2, 
+        1\/2\ \((\(-1\) - s)\)}, {\(-\(e\/2\)\), \(-\(n\/2\)\), 
+        1\/2\ \((\(-1\) + e + n)\), e\/2, n\/2, 
+        1\/2\ \((1 - e - n)\)}}\)], "Output",
+  CellLabel->"Out[168]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TableForm[Nens[e, n, s]]\)], "Input",
+  CellLabel->"In[169]:="],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {\(\(1 - s\)\/2\), 
+            "0", \(1\/2\ \((\(-1\) + s)\)\), \(\(1 + s\)\/2\), 
+            "0", \(1\/2\ \((\(-1\) - s)\)\)},
+          {"0", \(\(1 - s\)\/2\), \(1\/2\ \((\(-1\) + s)\)\), 
+            "0", \(\(1 + s\)\/2\), \(1\/2\ \((\(-1\) - s)\)\)},
+          {\(-\(e\/2\)\), \(-\(n\/2\)\), \(1\/2\ \((\(-1\) + e + 
+                  n)\)\), \(e\/2\), \(n\/2\), \(1\/2\ \((1 - e - n)\)\)}
+          },
+        RowSpacings->1,
+        ColumnSpacings->3,
+        RowAlignments->Baseline,
+        ColumnAlignments->{Left}],
+      (TableForm[ #]&)]], "Output",
+  CellLabel->"Out[169]//TableForm="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define the original coordinates:", "Subsection"],
+
+Cell[BoxData[
+    \(\(Q = {{x1, x2, x3, x4, x5, x6}, {y1, y2, y3, y4, y5, y6}, {z1, z2, z3, 
+            z4, z5, z6}};\)\)], "Input",
+  CellLabel->"In[170]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define the displacement vectors:", "Subsection"],
+
+Cell[BoxData[
+    \(\(q = {dx1, dy1, dz1, dx2, dy2, dz2, dx3, dy3, dz3, dx4, dy4, dz4, dx5, 
+          dy5, dz5, dx6, dy6, dz6};\)\)], "Input",
+  CellLabel->"In[171]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define Jacobian matrix:", "Subsection"],
+
+Cell[BoxData[
+    \(J[e_, n_, s_] := Nens[e, n, s] . Transpose[Q]\)], "Input",
+  CellLabel->"In[172]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TableForm[J[e, n, s]]\)], "Input",
+  CellLabel->"In[173]:="],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {\(1\/2\ \((1 - s)\)\ x1 + 1\/2\ \((\(-1\) + s)\)\ x3 + 
+              1\/2\ \((1 + s)\)\ x4 + 
+              1\/2\ \((\(-1\) - s)\)\ x6\), \(1\/2\ \((1 - s)\)\ y1 + 
+              1\/2\ \((\(-1\) + s)\)\ y3 + 1\/2\ \((1 + s)\)\ y4 + 
+              1\/2\ \((\(-1\) - s)\)\ y6\), \(1\/2\ \((1 - s)\)\ z1 + 
+              1\/2\ \((\(-1\) + s)\)\ z3 + 1\/2\ \((1 + s)\)\ z4 + 
+              1\/2\ \((\(-1\) - s)\)\ z6\)},
+          {\(1\/2\ \((1 - s)\)\ x2 + 1\/2\ \((\(-1\) + s)\)\ x3 + 
+              1\/2\ \((1 + s)\)\ x5 + 
+              1\/2\ \((\(-1\) - s)\)\ x6\), \(1\/2\ \((1 - s)\)\ y2 + 
+              1\/2\ \((\(-1\) + s)\)\ y3 + 1\/2\ \((1 + s)\)\ y5 + 
+              1\/2\ \((\(-1\) - s)\)\ y6\), \(1\/2\ \((1 - s)\)\ z2 + 
+              1\/2\ \((\(-1\) + s)\)\ z3 + 1\/2\ \((1 + s)\)\ z5 + 
+              1\/2\ \((\(-1\) - s)\)\ z6\)},
+          {\(\(-\(\(e\ x1\)\/2\)\) - \(n\ x2\)\/2 + 
+              1\/2\ \((\(-1\) + e + n)\)\ x3 + \(e\ x4\)\/2 + \(n\ x5\)\/2 + 
+              1\/2\ \((1 - e - 
+                    n)\)\ x6\), \(\(-\(\(e\ y1\)\/2\)\) - \(n\ y2\)\/2 + 
+              1\/2\ \((\(-1\) + e + n)\)\ y3 + \(e\ y4\)\/2 + \(n\ y5\)\/2 + 
+              1\/2\ \((1 - e - 
+                    n)\)\ y6\), \(\(-\(\(e\ z1\)\/2\)\) - \(n\ z2\)\/2 + 
+              1\/2\ \((\(-1\) + e + n)\)\ z3 + \(e\ z4\)\/2 + \(n\ z5\)\/2 + 
+              1\/2\ \((1 - e - n)\)\ z6\)}
+          },
+        RowSpacings->1,
+        ColumnSpacings->3,
+        RowAlignments->Baseline,
+        ColumnAlignments->{Left}],
+      (TableForm[ #]&)]], "Output",
+  CellLabel->"Out[173]//TableForm="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["... and its inverse:", "Subsubsection"],
+
+Cell[BoxData[
+    \(Jinv[e_, n_, s_] := Inverse[J[e, n, s]]\)], "Input",
+  CellLabel->"In[174]:="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Now we can define the shape function derivatives with respect to cartesian \
+coordinates:\
+\>", "Subsection"],
+
+Cell[BoxData[
+    \(Nxyz[e_, n_, s_] := Jinv[e, n, s] . Nens[e, n, s]\)], "Input",
+  CellLabel->"In[175]:="],
+
+Cell[BoxData[
+    \(B[e_, n_, s_]\  := 
+      With[\[IndentingNewLine]{\[IndentingNewLine]nax = \(Nxyz[e, n, 
+                s]\)[\([1, 1]\)], \[IndentingNewLine]nbx = \(Nxyz[e, n, 
+                s]\)[\([1, 2]\)], \[IndentingNewLine]ncx = \(Nxyz[e, n, 
+                s]\)[\([1, 3]\)], \[IndentingNewLine]ndx = \(Nxyz[e, n, 
+                s]\)[\([1, 4]\)], \[IndentingNewLine]nex = \(Nxyz[e, n, 
+                s]\)[\([1, 5]\)], \[IndentingNewLine]nfx = \(Nxyz[e, n, 
+                s]\)[\([1, 
+                6]\)], \[IndentingNewLine]\[IndentingNewLine]nay = \(Nxyz[e, 
+                n, s]\)[\([2, 1]\)], \[IndentingNewLine]nby = \(Nxyz[e, n, 
+                s]\)[\([2, 2]\)], \[IndentingNewLine]ncy = \(Nxyz[e, n, 
+                s]\)[\([2, 3]\)], \[IndentingNewLine]ndy = \(Nxyz[e, n, 
+                s]\)[\([2, 4]\)], \[IndentingNewLine]ney = \(Nxyz[e, n, 
+                s]\)[\([2, 5]\)], \[IndentingNewLine]nfy = \(Nxyz[e, n, 
+                s]\)[\([2, 
+                6]\)], \[IndentingNewLine]\[IndentingNewLine]naz = \(Nxyz[e, 
+                n, s]\)[\([3, 1]\)], \[IndentingNewLine]nbz = \(Nxyz[e, n, 
+                s]\)[\([3, 2]\)], \[IndentingNewLine]ncz = \(Nxyz[e, n, 
+                s]\)[\([3, 3]\)], \[IndentingNewLine]ndz = \(Nxyz[e, n, 
+                s]\)[\([3, 4]\)], \[IndentingNewLine]nez = \(Nxyz[e, n, 
+                s]\)[\([3, 5]\)], \[IndentingNewLine]nfz = \(Nxyz[e, n, 
+                s]\)[\([3, 
+                6]\)]\[IndentingNewLine]\[IndentingNewLine]}, {{nax, 0, 0, 
+            nbx, 0, 0, ncx, 0, 0, ndx, 0, 0, nex, 0, 0, nfx, 0, 
+            0}, \[IndentingNewLine]{0, nay, 0, 0, nby, 0, 0, ncy, 0, 0, ndy, 
+            0, 0, ney, 0, 0, nfy, 0}, \[IndentingNewLine]{0, 0, naz, 0, 0, 
+            nbz, 0, 0, ncz, 0, 0, ndz, 0, 0, nez, 0, 0, 
+            nfz}, \[IndentingNewLine]{0, naz, nay, 0, nbz, nby, 0, ncz, ncy, 
+            0, ndz, ndy, 0, nez, ney, 0, nfz, nfy}, \[IndentingNewLine]{naz, 
+            0, nax, nbz, 0, nbx, ncz, 0, ncx, ndz, 0, ndx, nez, 0, nex, nfz, 
+            0, nfx}, \[IndentingNewLine]{nay, nax, 0, nby, nbx, 0, ncy, ncx, 
+            0, ndy, ndx, 0, ney, nex, 0, nfy, nfx, 0}}]\)], "Input",
+  CellLabel->"In[176]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define strain (sxx,syy,szz,syz,sxz,sxy):", "Subsection"],
+
+Cell[BoxData[
+    \(strain[{e_, n_, s_}] := B[e, n, s] . q\)], "Input",
+  CellLabel->"In[177]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define gaussian quadrature points (9 of them):", "Subsection"],
+
+Cell[BoxData[
+    \(\(gps = {\[IndentingNewLine]{2/3, 1/6, \(-0.7745966692\), 
+            0.5555555556/6}, \[IndentingNewLine]{1/6, 2/3, \(-0.7745966692\), 
+            0.5555555556/6}, \[IndentingNewLine]{1/6, 1/6, \(-0.7745966692\), 
+            0.5555555556/6}, \[IndentingNewLine]{2/3, 1/6, 0, 
+            0.8888888889/6}, \[IndentingNewLine]{1/6, 2/3, 0, 
+            0.8888888889/6}, \[IndentingNewLine]{1/6, 1/6, 0, 
+            0.8888888889/6}, \[IndentingNewLine]{2/3, 1/6, 0.7745966692, 
+            0.5555555556/6}, \[IndentingNewLine]{1/6, 2/3, 0.7745966692, 
+            0.5555555556/6}, \[IndentingNewLine]{1/6, 1/6, 0.7745966692, 
+            0.5555555556/6}\[IndentingNewLine]};\)\)], "Input",
+  CellLabel->"In[178]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define material matrix D:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Dm[y_, 
+        r_] = \((y/\((\((1 + r)\)*\((1 - 
+                    2*r)\))\))\)*\[IndentingNewLine]{{1 - r, r, r, 0, 0, 
+            0}, \[IndentingNewLine]{r, 1 - r, r, 0, 0, 
+            0}, \[IndentingNewLine]{r, r, 1 - r, 0, 0, 
+            0}, \[IndentingNewLine]{0, 0, 0, \((1 - 2  r)\)/2, 0, 
+            0}, \[IndentingNewLine]{0, 0, 0, 0, \((1 - 2  r)\)/2, 
+            0}, \[IndentingNewLine]{0, 0, 0, 0, 
+            0, \((1 - 2  r)\)/2}}\)], "Input",
+  CellLabel->"In[179]:="],
+
+Cell[BoxData[
+    \({{\(\((1 - r)\)\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\), \(r\ y\)\/\(\((1 \
+- 2\ r)\)\ \((1 + r)\)\), \(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\), 0, 0, 
+        0}, {\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\), \(\((1 - r)\)\ \
+y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\), \(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\
+\), 0, 0, 
+        0}, {\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\), \(r\ y\)\/\(\((1 - 2\ \
+r)\)\ \((1 + r)\)\), \(\((1 - r)\)\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\), 0, 
+        0, 0}, {0, 0, 0, y\/\(2\ \((1 + r)\)\), 0, 0}, {0, 0, 0, 0, 
+        y\/\(2\ \((1 + r)\)\), 0}, {0, 0, 0, 0, 0, 
+        y\/\(2\ \((1 + r)\)\)}}\)], "Output",
+  CellLabel->"Out[179]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TableForm[Dm[y, r]]\)], "Input",
+  CellLabel->"In[180]:="],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {\(\(\((1 - r)\)\ y\)\/\(\((1 - 2\ r)\)\ \((1 + 
+                      r)\)\)\), \(\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + 
+                      r)\)\)\), \(\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\)\),
+             "0", "0", "0"},
+          {\(\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\)\), \(\(\((1 - 
+                      r)\)\ y\)\/\(\((1 - 2\ r)\)\ \((1 + 
+                      r)\)\)\), \(\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + r)\)\)\),
+             "0", "0", "0"},
+          {\(\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + 
+                      r)\)\)\), \(\(r\ y\)\/\(\((1 - 2\ r)\)\ \((1 + 
+                      r)\)\)\), \(\(\((1 - r)\)\ y\)\/\(\((1 - 
+                      2\ r)\)\ \((1 + r)\)\)\), "0", "0", "0"},
+          {"0", "0", "0", \(y\/\(2\ \((1 + r)\)\)\), "0", "0"},
+          {"0", "0", "0", "0", \(y\/\(2\ \((1 + r)\)\)\), "0"},
+          {"0", "0", "0", "0", "0", \(y\/\(2\ \((1 + r)\)\)\)}
+          },
+        RowSpacings->1,
+        ColumnSpacings->3,
+        RowAlignments->Baseline,
+        ColumnAlignments->{Left}],
+      (TableForm[ #]&)]], "Output",
+  CellLabel->"Out[180]//TableForm="]
+}, Open  ]],
+
+Cell[BoxData[
+    \(stress[{e_, n_, s_}, y_, r_] := Dm[y, r] . strain[{e, n, s}]\)], "Input",\
+
+  CellLabel->"In[181]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define principal stresses function:", "Subsection"],
+
+Cell[BoxData[
+    \(pstress[{e_, n_, s_}, y_, r_] := 
+      With[\[IndentingNewLine]{sxx = \(stress[{e, n, s}, y, 
+                r]\)[\([1]\)], \[IndentingNewLine]syy = \(stress[{e, n, s}, 
+                y, r]\)[\([2]\)], \[IndentingNewLine]szz = \(stress[{e, n, 
+                  s}, y, r]\)[\([3]\)], \[IndentingNewLine]syz = \(stress[{e, 
+                  n, s}, y, 
+                r]\)[\([4]\)], \[IndentingNewLine]sxz = \(stress[{e, n, s}, 
+                y, r]\)[\([5]\)], \[IndentingNewLine]sxy = \(stress[{e, n, 
+                  s}, y, r]\)[\([6]\)]}, \
+\[IndentingNewLine]Eigensystem[{{sxx, sxy, sxz}, {sxy, syy, syz}, {sxz, syz, 
+              szz}}]]\)], "Input",
+  CellLabel->"In[182]:="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Q = {\[IndentingNewLine]{0.0, 2.0, 0.0, 0.0, 2.0, 
+          0.0}, \[IndentingNewLine]{0.0, 0.0, 2.0, 0.0, 0.0, 
+          2.0}, \[IndentingNewLine]{0.2, 0.2, 0.2, 0.0, 0.0, 
+          0.0}\[IndentingNewLine]}\)], "Input",
+  CellLabel->"In[183]:="],
+
+Cell[BoxData[
+    \({{0.`, 2.`, 0.`, 0.`, 2.`, 0.`}, {0.`, 0.`, 2.`, 0.`, 0.`, 2.`}, {0.2`, 
+        0.2`, 0.2`, 0.`, 0.`, 0.`}}\)], "Output",
+  CellLabel->"Out[183]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example 1: (small displacement in x)", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(q = {\[IndentingNewLine]0, 0, 0, \[IndentingNewLine]0.1, 0, 
+        0, \[IndentingNewLine]0, 0, 0, \[IndentingNewLine]0, 0, 
+        0, \[IndentingNewLine]0.1, 0, 0, \[IndentingNewLine]0, 0, 
+        0}\)], "Input",
+  CellLabel->"In[993]:="],
+
+Cell[BoxData[
+    \({0, 0, 0, 0.1`, 0, 0, 0, 0, 0, 0, 0, 0, 0.1`, 0, 0, 0, 0, 
+      0}\)], "Output",
+  CellLabel->"Out[993]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output strains and stresses:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([1]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([1]\)], 1, 0]\), "\[IndentingNewLine]", 
+    \(pstress[gps[\([1]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[994]:="],
+
+Cell[BoxData[
+    \({0.05000000000000001`, 0.`, 0.`, 0.`, 
+      2.7755575615628914`*^-17, \(-0.025000000000000005`\)}\)], "Output",
+  CellLabel->"Out[994]="],
+
+Cell[BoxData[
+    \({0.05000000000000001`, 0.`, 0.`, 0.`, 
+      1.3877787807814457`*^-17, \(-0.012500000000000002`\)}\)], "Output",
+  CellLabel->"Out[995]="],
+
+Cell[BoxData[
+    \({{0.05295084971874738`, \(-0.0029508497187473717`\), 
+        0.`}, {{0.9732489894677301`, \(-0.22975292054736116`\), 
+          2.550769823665545`*^-16}, {\(-0.22975292054736116`\), \
+\(-0.9732489894677301`\), 1.0805234368002402`*^-15}, {0.`, 
+          1.1102230246251563`*^-15, 1.`}}}\)], "Output",
+  CellLabel->"Out[996]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([2]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([2]\)], 1, 0]\), "\[IndentingNewLine]", 
+    \(pstress[gps[\([2]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[997]:="],
+
+Cell[BoxData[
+    \({0.05000000000000001`, 0.`, 0.`, 0.`, 
+      0.`, \(-0.025000000000000005`\)}\)], "Output",
+  CellLabel->"Out[997]="],
+
+Cell[BoxData[
+    \({0.05000000000000001`, 0.`, 0.`, 0.`, 
+      0.`, \(-0.012500000000000002`\)}\)], "Output",
+  CellLabel->"Out[998]="],
+
+Cell[BoxData[
+    \({{0.05295084971874738`, \(-0.0029508497187473717`\), 
+        0.`}, {{0.9732489894677301`, \(-0.22975292054736116`\), 
+          0.`}, {0.22975292054736116`, 0.9732489894677301`, 0.`}, {0.`, 0.`, 
+          1.`}}}\)], "Output",
+  CellLabel->"Out[999]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([3]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([3]\)], 1, 0]\), "\[IndentingNewLine]", 
+    \(pstress[gps[\([3]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[1000]:="],
+
+Cell[BoxData[
+    \({0.05000000000000001`, 0.`, 0.`, 0.`, 
+      0.`, \(-0.025000000000000005`\)}\)], "Output",
+  CellLabel->"Out[1000]="],
+
+Cell[BoxData[
+    \({0.05000000000000001`, 0.`, 0.`, 0.`, 
+      0.`, \(-0.012500000000000002`\)}\)], "Output",
+  CellLabel->"Out[1001]="],
+
+Cell[BoxData[
+    \({{0.05295084971874738`, \(-0.0029508497187473717`\), 
+        0.`}, {{0.9732489894677301`, \(-0.22975292054736116`\), 
+          0.`}, {0.22975292054736116`, 0.9732489894677301`, 0.`}, {0.`, 0.`, 
+          1.`}}}\)], "Output",
+  CellLabel->"Out[1002]="]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Example 2: (large displacement in x)", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Q = {\[IndentingNewLine]{\(-1\), 1, 0, \(-1\), 1, 
+          0}, \[IndentingNewLine]{\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+          1}, \[IndentingNewLine]{0.1, 0.1, 0.1, 0, 0, 
+          0}\[IndentingNewLine]}\)], "Input",
+  CellLabel->"In[962]:="],
+
+Cell[BoxData[
+    \({{\(-1\), 1, 0, \(-1\), 1, 0}, {\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+        1}, {0.1`, 0.1`, 0.1`, 0, 0, 0}}\)], "Output",
+  CellLabel->"Out[962]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(q = {\[IndentingNewLine]0, 0, 0, \[IndentingNewLine]1, 0, 
+        0, \[IndentingNewLine]0, 0, 0, \[IndentingNewLine]0, 0, 
+        0, \[IndentingNewLine]1, 0, 0, \[IndentingNewLine]0, 0, 0}\)], "Input",\
+
+  CellLabel->"In[963]:="],
+
+Cell[BoxData[
+    \({0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}\)], "Output",
+  CellLabel->"Out[963]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output strains and stresses:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([1]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([1]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[964]:="],
+
+Cell[BoxData[
+    \({0.5`, 0.`, 0.`, 0.`, 2.220446049250313`*^-16, \(-0.25`\)}\)], "Output",\
+
+  CellLabel->"Out[964]="],
+
+Cell[BoxData[
+    \({0.5`, 0.`, 0.`, 0.`, 
+      1.1102230246251565`*^-16, \(-0.125`\)}\)], "Output",
+  CellLabel->"Out[965]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([2]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([2]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[966]:="],
+
+Cell[BoxData[
+    \({0.5`, 0.`, 0.`, 0.`, 0.`, \(-0.25`\)}\)], "Output",
+  CellLabel->"Out[966]="],
+
+Cell[BoxData[
+    \({0.5`, 0.`, 0.`, 0.`, 0.`, \(-0.125`\)}\)], "Output",
+  CellLabel->"Out[967]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([3]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([3]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[968]:="],
+
+Cell[BoxData[
+    \({0.5`, 0.`, 0.`, 0.`, 0.`, \(-0.25`\)}\)], "Output",
+  CellLabel->"Out[968]="],
+
+Cell[BoxData[
+    \({0.5`, 0.`, 0.`, 0.`, 0.`, \(-0.125`\)}\)], "Output",
+  CellLabel->"Out[969]="]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Example 3: (large displacement in x but only top face)", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Q = {\[IndentingNewLine]{\(-1\), 1, 0, \(-1\), 1, 
+          0}, \[IndentingNewLine]{\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+          1}, \[IndentingNewLine]{0.1, 0.1, 0.1, 0, 0, 
+          0}\[IndentingNewLine]}\)], "Input",
+  CellLabel->"In[881]:="],
+
+Cell[BoxData[
+    \({{\(-1\), 1, 0, \(-1\), 1, 0}, {\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+        1}, {0.1`, 0.1`, 0.1`, 0, 0, 0}}\)], "Output",
+  CellLabel->"Out[881]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(q = {\[IndentingNewLine]0, 0, 0, \[IndentingNewLine]1, 0, 
+        0, \[IndentingNewLine]0, 0, 0, \[IndentingNewLine]0, 0, 
+        0, \[IndentingNewLine]0, 0, 0, \[IndentingNewLine]0, 0, 0}\)], "Input",\
+
+  CellLabel->"In[882]:="],
+
+Cell[BoxData[
+    \({0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}\)], "Output",
+  CellLabel->"Out[882]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output strains and stresses:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([1]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([1]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[883]:="],
+
+Cell[BoxData[
+    \({0.44364916730000004`, 0.`, 0.`, 0.`, 
+      1.6666666666666667`, \(-0.22182458365000002`\)}\)], "Output",
+  CellLabel->"Out[883]="],
+
+Cell[BoxData[
+    \({0.44364916730000004`, 0.`, 0.`, 0.`, 
+      0.8333333333333334`, \(-0.11091229182500001`\)}\)], "Output",
+  CellLabel->"Out[884]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([2]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([2]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[885]:="],
+
+Cell[BoxData[
+    \({0.44364916730000004`, 0.`, 0.`, 0.`, 
+      6.666666666666666`, \(-0.22182458365000002`\)}\)], "Output",
+  CellLabel->"Out[885]="],
+
+Cell[BoxData[
+    \({0.44364916730000004`, 0.`, 0.`, 0.`, 
+      3.333333333333333`, \(-0.11091229182500001`\)}\)], "Output",
+  CellLabel->"Out[886]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([3]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([3]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[887]:="],
+
+Cell[BoxData[
+    \({0.44364916730000004`, 0.`, 0.`, 0.`, 
+      1.6666666666666665`, \(-0.22182458365000002`\)}\)], "Output",
+  CellLabel->"Out[887]="],
+
+Cell[BoxData[
+    \({0.44364916730000004`, 0.`, 0.`, 0.`, 
+      0.8333333333333333`, \(-0.11091229182500001`\)}\)], "Output",
+  CellLabel->"Out[888]="]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Example 4: (checking strain after rigid body movement in all directions)\
+\>", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Q = {\[IndentingNewLine]{\(-1\), 1, 0, \(-1\), 1, 
+          0}, \[IndentingNewLine]{\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+          1}, \[IndentingNewLine]{0.1, 0.1, 0.1, 0, 0, 
+          0}\[IndentingNewLine]}\)], "Input",
+  CellLabel->"In[889]:="],
+
+Cell[BoxData[
+    \({{\(-1\), 1, 0, \(-1\), 1, 0}, {\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+        1}, {0.1`, 0.1`, 0.1`, 0, 0, 0}}\)], "Output",
+  CellLabel->"Out[889]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(q\)\(=\)\({\[IndentingNewLine]0.1, \(-0.2\), 
+        0.3, \[IndentingNewLine]0.1, \(-0.2\), 
+        0.3, \[IndentingNewLine]0.1, \(-0.2\), 
+        0.3, \[IndentingNewLine]0.1, \(-0.2\), 
+        0.3, \[IndentingNewLine]0.1, \(-0.2\), 
+        0.3, \[IndentingNewLine]0.1, \(-0.2\), 
+        0.3\[IndentingNewLine]}\)\(\[IndentingNewLine]\)\)\)], "Input",
+  CellLabel->"In[890]:="],
+
+Cell[BoxData[
+    \({0.1`, \(-0.2`\), 0.3`, 0.1`, \(-0.2`\), 0.3`, 0.1`, \(-0.2`\), 0.3`, 
+      0.1`, \(-0.2`\), 0.3`, 0.1`, \(-0.2`\), 0.3`, 0.1`, \(-0.2`\), 
+      0.3`}\)], "Output",
+  CellLabel->"Out[890]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output strains and stresses:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([1]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([1]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[891]:="],
+
+Cell[BoxData[
+    \({0.`, 0.`, 
+      2.7755575615628914`*^-16, \(-7.979727989493313`*^-17\), \
+\(-8.326672684688674`*^-17\), \(-8.673617379884035`*^-19\)}\)], "Output",
+  CellLabel->"Out[891]="],
+
+Cell[BoxData[
+    \({0.`, 0.`, 
+      2.7755575615628914`*^-16, \(-3.9898639947466563`*^-17\), \
+\(-4.163336342344337`*^-17\), \(-4.336808689942018`*^-19\)}\)], "Output",
+  CellLabel->"Out[892]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([2]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([2]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[893]:="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-1.6653345369377348`*^-16\), \(-2.463307335887066`*^-16\), 
+      1.1102230246251565`*^-16, \(-8.673617379884035`*^-19\)}\)], "Output",
+  CellLabel->"Out[893]="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-1.6653345369377348`*^-16\), \(-1.231653667943533`*^-16\), 
+      5.551115123125783`*^-17, \(-4.336808689942018`*^-19\)}\)], "Output",
+  CellLabel->"Out[894]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([3]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([3]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[895]:="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-2.220446049250313`*^-16\), \(-1.9081958235744878`*^-16\), 
+      1.1102230246251565`*^-16, \(-8.673617379884035`*^-19\)}\)], "Output",
+  CellLabel->"Out[895]="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-2.220446049250313`*^-16\), \(-9.540979117872439`*^-17\), 
+      5.551115123125783`*^-17, \(-4.336808689942018`*^-19\)}\)], "Output",
+  CellLabel->"Out[896]="]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Example 5: (checking strain after rigid body movement in one direction)\
+\>", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Q = {\[IndentingNewLine]{\(-1\), 1, 0, \(-1\), 1, 
+          0}, \[IndentingNewLine]{\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+          1}, \[IndentingNewLine]{0.1, 0.1, 0.1, 0, 0, 
+          0}\[IndentingNewLine]}\)], "Input",
+  CellLabel->"In[897]:="],
+
+Cell[BoxData[
+    \({{\(-1\), 1, 0, \(-1\), 1, 0}, {\(-1\), \(-1\), 1, \(-1\), \(-1\), 
+        1}, {0.1`, 0.1`, 0.1`, 0, 0, 0}}\)], "Output",
+  CellLabel->"Out[897]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal coordinates:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(q\)\(=\)\({\[IndentingNewLine]0, 0, 0.3, \[IndentingNewLine]0, 0, 
+        0.3, \[IndentingNewLine]0, 0, 0.3, \[IndentingNewLine]0, 0, 
+        0.3, \[IndentingNewLine]0, 0, 0.3, \[IndentingNewLine]0, 0, 
+        0.3\[IndentingNewLine]}\)\(\[IndentingNewLine]\)\)\)], "Input",
+  CellLabel->"In[898]:="],
+
+Cell[BoxData[
+    \({0, 0, 0.3`, 0, 0, 0.3`, 0, 0, 0.3`, 0, 0, 0.3`, 0, 0, 0.3`, 0, 0, 
+      0.3`}\)], "Output",
+  CellLabel->"Out[898]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output strains and stresses:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([1]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([1]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[899]:="],
+
+Cell[BoxData[
+    \({0.`, 0.`, 2.7755575615628914`*^-16, 0.`, 0.`, 0.`}\)], "Output",
+  CellLabel->"Out[899]="],
+
+Cell[BoxData[
+    \({0.`, 0.`, 2.7755575615628914`*^-16, 0.`, 0.`, 0.`}\)], "Output",
+  CellLabel->"Out[900]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([2]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([2]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[901]:="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-1.6653345369377348`*^-16\), 0.`, 0.`, 0.`}\)], "Output",
+  CellLabel->"Out[901]="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-1.6653345369377348`*^-16\), 0.`, 0.`, 0.`}\)], "Output",
+  CellLabel->"Out[902]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(strain[gps[\([3]\)]]\), "\[IndentingNewLine]", 
+    \(stress[gps[\([3]\)], 1, 0]\)}], "Input",
+  CellLabel->"In[903]:="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-2.220446049250313`*^-16\), 0.`, 0.`, 0.`}\)], "Output",
+  CellLabel->"Out[903]="],
+
+Cell[BoxData[
+    \({0.`, 0.`, \(-2.220446049250313`*^-16\), 0.`, 0.`, 0.`}\)], "Output",
+  CellLabel->"Out[904]="]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Example 1: (small displacement in x)", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Define nodal displacements:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(q = {\[IndentingNewLine]0, 0, 0, \[IndentingNewLine]0.4, 0, 
+        0, \[IndentingNewLine]0, 0, 0, \[IndentingNewLine]0, 0, 
+        0, \[IndentingNewLine]0.4, 0, 0, \[IndentingNewLine]0, 0, 
+        0}\)], "Input",
+  CellLabel->"In[84]:="],
+
+Cell[BoxData[
+    \({0, 0, 0, 0.4`, 0, 0, 0, 0, 0, 0, 0, 0, 0.4`, 0, 0, 0, 0, 
+      0}\)], "Output",
+  CellLabel->"Out[84]="]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Show the B matrix:", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TableForm[
+      B[gps[\([1, 1]\)], gps[\([1, 2]\)], gps[\([1, 3]\)]]]\)], "Input",
+  CellLabel->"In[135]:="],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {\(-0.44364916730000004`\), "0", "0", "0.44364916730000004`", "0", 
+            "0", "0.`", "0", "0", \(-0.05635083269999999`\), "0", "0", 
+            "0.05635083269999999`", "0", "0", "0.`", "0", "0"},
+          {"0", \(-0.44364916730000004`\), "0", "0", "0.`", "0", "0", 
+            "0.44364916730000004`", "0", "0", \(-0.05635083269999999`\), "0", 
+            "0", "0.`", "0", "0", "0.05635083269999999`", "0"},
+          {"0", "0", "3.333333333333333`", "0", "0", "0.8333333333333333`", 
+            "0", "0", "0.8333333333333333`", "0", 
+            "0", \(-3.333333333333333`\), "0", "0", \(-0.8333333333333333`\), 
+            "0", "0", \(-0.8333333333333333`\)},
+          {"0", "3.333333333333333`", \(-0.44364916730000004`\), "0", 
+            "0.8333333333333333`", "0.`", "0", "0.8333333333333333`", 
+            "0.44364916730000004`", 
+            "0", \(-3.333333333333333`\), \(-0.05635083269999999`\), 
+            "0", \(-0.8333333333333333`\), "0.`", 
+            "0", \(-0.8333333333333333`\), "0.05635083269999999`"},
+          {"3.333333333333333`", "0", \(-0.44364916730000004`\), 
+            "0.8333333333333333`", "0", "0.44364916730000004`", 
+            "0.8333333333333333`", "0", "0.`", \(-3.333333333333333`\), 
+            "0", \(-0.05635083269999999`\), \(-0.8333333333333333`\), "0", 
+            "0.05635083269999999`", \(-0.8333333333333333`\), "0", "0.`"},
+          {\(-0.44364916730000004`\), \(-0.44364916730000004`\), "0", "0.`", 
+            "0.44364916730000004`", "0", "0.44364916730000004`", "0.`", 
+            "0", \(-0.05635083269999999`\), \(-0.05635083269999999`\), "0", 
+            "0.`", "0.05635083269999999`", "0", "0.05635083269999999`", "0.`",
+             "0"}
+          },
+        RowSpacings->1,
+        ColumnSpacings->3,
+        RowAlignments->Baseline,
+        ColumnAlignments->{Left}],
+      (TableForm[ #]&)]], "Output",
+  CellLabel->"Out[135]//TableForm="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Det[J[gps[\([1, 1]\)], gps[\([1, 2]\)], gps[\([1, 3]\)]]]\)], "Input",
+  CellLabel->"In[184]:="],
+
+Cell[BoxData[
+    \(\(-0.39999999999999997`\)\)], "Output",
+  CellLabel->"Out[184]="]
+}, Open  ]],
+
+Cell[BoxData[
+    \(Ki[i_] := 
+      Transpose[B[gps[\([i, 1]\)], gps[\([i, 2]\)], gps[\([i, 3]\)]]] . 
+          Dm[1, 0] . B[gps[\([i, 1]\)], gps[\([i, 2]\)], gps[\([i, 3]\)]]*
+        Abs[Det[J[gps[\([i, 1]\)], gps[\([i, 2]\)], gps[\([i, 3]\)]]]]*
+        gps[\([i, 4]\)]\)], "Input",
+  CellLabel->"In[206]:="],
+
+Cell[BoxData[
+    \(K := Fold[Plus, 0, Map[Ki, Table[i, {i, 1, 9}]]]\)], "Input",
+  CellLabel->"In[210]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(K\)], "Input",
+  CellLabel->"In[211]:="],
+
+Cell[BoxData[
+    \({{0.8833333333765357`, 0.01666666666717871`, \(-0.0833333333375`\), 
+        0.3833333333531425`, \(-0.01666666666717871`\), 0.0833333333375`, 
+        0.40000000002032116`, 0.`, 0.`, \(-0.8083333333727859`\), 
+        0.00833333333407129`, \(-0.0833333333375`\), \
+\(-0.43333333335564245`\), \(-0.00833333333407129`\), 
+        0.0833333333375`, \(-0.42500000002157123`\), 0.`, 
+        0.`}, {0.01666666666717871`, 
+        0.8833333333765357`, \(-0.0833333333375`\), 0.`, 
+        0.40000000002032116`, 0.`, \(-0.01666666666717871`\), 
+        0.3833333333531425`, 0.0833333333375`, 
+        0.00833333333407129`, \(-0.8083333333727859`\), \
+\(-0.0833333333375`\), 0.`, \(-0.4250000000215712`\), 
+        0.`, \(-0.00833333333407129`\), \(-0.4333333333556425`\), 
+        0.0833333333375`}, {\(-0.0833333333375`\), \(-0.0833333333375`\), 
+        1.7000000000843571`, \(-0.0833333333375`\), \(-0.0833333333375`\), 
+        0.816666666707821`, \(-0.0833333333375`\), \(-0.0833333333375`\), 
+        0.816666666707821`, 0.0833333333375`, 
+        0.0833333333375`, \(-1.6500000000818569`\), 0.0833333333375`, 
+        0.0833333333375`, \(-0.8416666667090712`\), 0.0833333333375`, 
+        0.0833333333375`, \(-0.8416666667090712`\)}, {0.3833333333531425`, 
+        0.`, \(-0.0833333333375`\), 0.8666666667093572`, 0.`, 
+        0.0833333333375`, 0.41666666668749996`, 0.`, 
+        0.`, \(-0.43333333335564245`\), 
+        0.`, \(-0.08333333333749998`\), \(-0.8166666667068571`\), 0.`, 
+        0.08333333333749998`, \(-0.41666666668749996`\), 0.`, 
+        0.`}, {\(-0.01666666666717871`\), 
+        0.40000000002032116`, \(-0.0833333333375`\), 0.`, 
+        0.8500000000421785`, 0.`, 0.01666666666717871`, 0.41666666668749996`, 
+        0.0833333333375`, \(-0.00833333333407129`\), \
+\(-0.4250000000215712`\), \(-0.08333333333749998`\), 
+        0.`, \(-0.8250000000409284`\), 0.`, 
+        0.00833333333407129`, \(-0.41666666668749996`\), 
+        0.08333333333749998`}, {0.0833333333375`, 0.`, 0.816666666707821`, 
+        0.0833333333375`, 0.`, 1.6833333334171783`, 0.0833333333375`, 0.`, 
+        0.8333333333749999`, \(-0.0833333333375`\), 
+        0.`, \(-0.8416666667090712`\), \(-0.0833333333375`\), 
+        0.`, \(-1.6583333334159285`\), \(-0.0833333333375`\), 
+        0.`, \(-0.8333333333749999`\)}, {0.40000000002032116`, \
+\(-0.01666666666717871`\), \(-0.0833333333375`\), 0.41666666668749996`, 
+        0.01666666666717871`, 0.0833333333375`, 0.8500000000421786`, 0.`, 
+        0.`, \(-0.42500000002157123`\), \(-0.00833333333407129`\), \
+\(-0.0833333333375`\), \(-0.41666666668749996`\), 0.00833333333407129`, 
+        0.0833333333375`, \(-0.8250000000409287`\), 0.`, 0.`}, {0.`, 
+        0.3833333333531425`, \(-0.0833333333375`\), 0.`, 
+        0.41666666668749996`, 0.`, 0.`, 0.8666666667093573`, 
+        0.0833333333375`, 
+        0.`, \(-0.4333333333556425`\), \(-0.0833333333375`\), 
+        0.`, \(-0.41666666668749996`\), 0.`, 0.`, \(-0.8166666667068572`\), 
+        0.0833333333375`}, {0.`, 0.0833333333375`, 0.816666666707821`, 0.`, 
+        0.0833333333375`, 0.8333333333749999`, 0.`, 0.0833333333375`, 
+        1.6833333334171787`, 
+        0.`, \(-0.0833333333375`\), \(-0.8416666667090712`\), 
+        0.`, \(-0.0833333333375`\), \(-0.8333333333749999`\), 
+        0.`, \(-0.0833333333375`\), \(-1.6583333334159287`\)}, \
+{\(-0.8083333333727859`\), 0.00833333333407129`, 
+        0.0833333333375`, \(-0.43333333335564245`\), \
+\(-0.00833333333407129`\), \(-0.0833333333375`\), \(-0.42500000002157123`\), 
+        0.`, 0.`, 0.8833333333765357`, 0.01666666666717871`, 
+        0.0833333333375`, 
+        0.38333333335314246`, \(-0.01666666666717871`\), \
+\(-0.0833333333375`\), 0.40000000002032116`, 0.`, 
+        0.`}, {0.00833333333407129`, \(-0.8083333333727859`\), 
+        0.0833333333375`, 0.`, \(-0.4250000000215712`\), 
+        0.`, \(-0.00833333333407129`\), \(-0.4333333333556425`\), \
+\(-0.0833333333375`\), 0.01666666666717871`, 0.8833333333765357`, 
+        0.0833333333375`, 0.`, 0.40000000002032116`, 
+        0.`, \(-0.01666666666717871`\), 
+        0.3833333333531425`, \(-0.0833333333375`\)}, {\(-0.0833333333375`\), \
+\(-0.0833333333375`\), \(-1.6500000000818569`\), \(-0.08333333333749998`\), \
+\(-0.08333333333749998`\), \(-0.8416666667090712`\), \(-0.0833333333375`\), \
+\(-0.0833333333375`\), \(-0.8416666667090712`\), 0.0833333333375`, 
+        0.0833333333375`, 1.7000000000843571`, 0.08333333333749998`, 
+        0.08333333333749998`, 0.8166666667078211`, 0.0833333333375`, 
+        0.0833333333375`, 0.816666666707821`}, {\(-0.43333333335564245`\), 
+        0.`, 0.0833333333375`, \(-0.8166666667068571`\), 
+        0.`, \(-0.0833333333375`\), \(-0.41666666668749996`\), 0.`, 0.`, 
+        0.38333333335314246`, 0.`, 0.08333333333749998`, 0.8666666667093572`, 
+        0.`, \(-0.08333333333749998`\), 0.41666666668749996`, 0.`, 
+        0.`}, {\(-0.00833333333407129`\), \(-0.4250000000215712`\), 
+        0.0833333333375`, 0.`, \(-0.8250000000409284`\), 0.`, 
+        0.00833333333407129`, \(-0.41666666668749996`\), \
+\(-0.0833333333375`\), \(-0.01666666666717871`\), 0.40000000002032116`, 
+        0.08333333333749998`, 0.`, 0.8500000000421783`, 0.`, 
+        0.01666666666717871`, 
+        0.41666666668749996`, \(-0.08333333333749998`\)}, {0.0833333333375`, 
+        0.`, \(-0.8416666667090712`\), 0.08333333333749998`, 
+        0.`, \(-1.6583333334159285`\), 0.0833333333375`, 
+        0.`, \(-0.8333333333749999`\), \(-0.0833333333375`\), 0.`, 
+        0.8166666667078211`, \(-0.08333333333749998`\), 0.`, 
+        1.6833333334171785`, \(-0.0833333333375`\), 0.`, 
+        0.8333333333749999`}, {\(-0.42500000002157123`\), \
+\(-0.00833333333407129`\), 0.0833333333375`, \(-0.41666666668749996`\), 
+        0.00833333333407129`, \(-0.0833333333375`\), \
+\(-0.8250000000409287`\), 0.`, 0.`, 
+        0.40000000002032116`, \(-0.01666666666717871`\), 0.0833333333375`, 
+        0.41666666668749996`, 0.01666666666717871`, \(-0.0833333333375`\), 
+        0.8500000000421787`, 0.`, 0.`}, {0.`, \(-0.4333333333556425`\), 
+        0.0833333333375`, 0.`, \(-0.41666666668749996`\), 0.`, 
+        0.`, \(-0.8166666667068572`\), \(-0.0833333333375`\), 0.`, 
+        0.3833333333531425`, 0.0833333333375`, 0.`, 0.41666666668749996`, 
+        0.`, 0.`, 0.8666666667093573`, \(-0.0833333333375`\)}, {0.`, 
+        0.0833333333375`, \(-0.8416666667090712`\), 0.`, 
+        0.08333333333749998`, \(-0.8333333333749999`\), 0.`, 
+        0.0833333333375`, \(-1.6583333334159287`\), 
+        0.`, \(-0.0833333333375`\), 0.816666666707821`, 
+        0.`, \(-0.08333333333749998`\), 0.8333333333749999`, 
+        0.`, \(-0.0833333333375`\), 1.6833333334171785`}}\)], "Output",
+  CellLabel->"Out[211]="]
+}, Open  ]],
+
+Cell[BoxData[
+    \(Knew := 
+      MatInt[Transpose[B[e, n, s]] . Dm[1, 0] . B[e, n, s]*
+          Abs[Det[J[e, n, s]]]]\)], "Input",
+  CellLabel->"In[226]:="],
+
+Cell[BoxData[
+    \(MatInt[m_] := Map[VecInt, m]\)], "Input",
+  CellLabel->"In[189]:="],
+
+Cell[BoxData[
+    \(VecInt[v_] := Map[FunInt, v]\)], "Input",
+  CellLabel->"In[190]:="],
+
+Cell[BoxData[
+    \(FunInt[f_] := 
+      Integrate[f, {e, 0, 1}, {n, 0, 1 - e}, {s, \(-1\), 1}]\)], "Input",
+  CellLabel->"In[228]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Knew\)], "Input",
+  CellLabel->"In[229]:="],
+
+Cell[BoxData[
+    \({{0.8833333333333331`, 0.01666666666666667`, \(-0.08333333333333337`\), 
+        0.38333333333333375`, \(-0.016666666666666663`\), 
+        0.08333333333333337`, 0.3999999999999999`, 0, 
+        0, \(-0.808333333333333`\), 
+        0.008333333333333335`, \(-0.08333333333333337`\), \
+\(-0.4333333333333331`\), \(-0.008333333333333335`\), 
+        0.08333333333333337`, \(-0.4249999999999998`\), 0, 
+        0}, {0.01666666666666667`, 
+        0.8833333333333331`, \(-0.08333333333333337`\), 0, 
+        0.4000000000000008`, 0, \(-0.016666666666666663`\), 
+        0.38333333333333375`, 0.08333333333333337`, 
+        0.008333333333333335`, \(-0.808333333333333`\), \
+\(-0.08333333333333337`\), 0, \(-0.4250000000000007`\), 
+        0, \(-0.008333333333333335`\), \(-0.433333333333334`\), 
+        0.08333333333333337`}, {\(-0.08333333333333337`\), \
+\(-0.08333333333333337`\), 
+        1.7`, \(-0.08333333333333333`\), \(-0.08333333333333333`\), 
+        0.8166666666666673`, \(-0.08333333333333334`\), \
+\(-0.08333333333333334`\), 0.8166666666666673`, 0.08333333333333337`, 
+        0.08333333333333337`, \(-1.65`\), 0.08333333333333333`, 
+        0.08333333333333333`, \(-0.8416666666666668`\), 0.08333333333333334`, 
+        0.08333333333333334`, \(-0.8416666666666677`\)}, \
+{0.38333333333333375`, 0, \(-0.08333333333333333`\), 0.8666666666666651`, 0, 
+        0.08333333333333333`, 0.416666666666667`, 0, 
+        0, \(-0.4333333333333331`\), 
+        0, \(-0.08333333333333333`\), \(-0.8166666666666658`\), 0, 
+        0.08333333333333333`, \(-0.416666666666667`\), 0, 
+        0}, {\(-0.016666666666666663`\), 
+        0.4000000000000008`, \(-0.08333333333333333`\), 0, 
+        0.8500000000000003`, 0, 0.01666666666666667`, 0.416666666666667`, 
+        0.08333333333333333`, \(-0.008333333333333335`\), \
+\(-0.4250000000000007`\), \(-0.08333333333333333`\), 
+        0, \(-0.8249999999999991`\), 0, 
+        0.008333333333333335`, \(-0.416666666666667`\), 
+        0.08333333333333333`}, {0.08333333333333337`, 0, 0.8166666666666673`, 
+        0.08333333333333333`, 0, 1.6833333333333331`, 0.08333333333333334`, 
+        0, 0.833333333333334`, \(-0.08333333333333337`\), 
+        0, \(-0.8416666666666668`\), \(-0.08333333333333333`\), 
+        0, \(-1.658333333333331`\), \(-0.08333333333333334`\), 
+        0, \(-0.833333333333334`\)}, {0.3999999999999999`, \
+\(-0.016666666666666663`\), \(-0.08333333333333334`\), 0.416666666666667`, 
+        0.01666666666666667`, 0.08333333333333334`, 0.8499999999999985`, 0, 
+        0, \(-0.4249999999999998`\), \(-0.008333333333333335`\), \
+\(-0.08333333333333334`\), \(-0.416666666666667`\), 0.008333333333333335`, 
+        0.08333333333333334`, \(-0.8249999999999982`\), 0, 0}, {0, 
+        0.38333333333333375`, \(-0.08333333333333334`\), 0, 
+        0.416666666666667`, 0, 0, 0.8666666666666643`, 0.08333333333333334`, 
+        0, \(-0.433333333333334`\), \(-0.08333333333333334`\), 
+        0, \(-0.416666666666667`\), 0, 0, \(-0.816666666666668`\), 
+        0.08333333333333334`}, {0, 0.08333333333333337`, 0.8166666666666673`, 
+        0, 0.08333333333333333`, 0.833333333333334`, 0, 0.08333333333333334`, 
+        1.6833333333333305`, 
+        0, \(-0.08333333333333337`\), \(-0.8416666666666677`\), 
+        0, \(-0.08333333333333333`\), \(-0.833333333333334`\), 
+        0, \(-0.08333333333333334`\), \(-1.6583333333333354`\)}, \
+{\(-0.808333333333333`\), 0.008333333333333335`, 
+        0.08333333333333337`, \(-0.4333333333333331`\), \
+\(-0.008333333333333335`\), \(-0.08333333333333337`\), \(-0.4249999999999998`\
+\), 0, 0, 0.8833333333333331`, 0.016666666666666663`, 0.08333333333333337`, 
+        0.3833333333333333`, \(-0.01666666666666667`\), \
+\(-0.08333333333333337`\), 0.3999999999999999`, 0, 
+        0}, {0.008333333333333335`, \(-0.808333333333333`\), 
+        0.08333333333333337`, 0, \(-0.4250000000000007`\), 
+        0, \(-0.008333333333333335`\), \(-0.433333333333334`\), \
+\(-0.08333333333333337`\), 0.016666666666666663`, 0.8833333333333331`, 
+        0.08333333333333337`, 0, 0.4000000000000008`, 
+        0, \(-0.01666666666666667`\), 
+        0.3833333333333333`, \(-0.08333333333333337`\)}, \
+{\(-0.08333333333333337`\), \(-0.08333333333333337`\), \(-1.65`\), \
+\(-0.08333333333333333`\), \(-0.08333333333333333`\), \
+\(-0.8416666666666668`\), \(-0.08333333333333334`\), \
+\(-0.08333333333333334`\), \(-0.8416666666666677`\), 0.08333333333333337`, 
+        0.08333333333333337`, 1.7`, 0.08333333333333333`, 
+        0.08333333333333333`, 0.8166666666666673`, 0.08333333333333334`, 
+        0.08333333333333334`, 
+        0.8166666666666673`}, {\(-0.4333333333333331`\), 0, 
+        0.08333333333333333`, \(-0.8166666666666658`\), 
+        0, \(-0.08333333333333333`\), \(-0.416666666666667`\), 0, 0, 
+        0.3833333333333333`, 0, 0.08333333333333333`, 0.8666666666666651`, 
+        0, \(-0.08333333333333333`\), 0.416666666666667`, 0, 
+        0}, {\(-0.008333333333333335`\), \(-0.4250000000000007`\), 
+        0.08333333333333333`, 0, \(-0.8249999999999991`\), 0, 
+        0.008333333333333335`, \(-0.416666666666667`\), \
+\(-0.08333333333333333`\), \(-0.01666666666666667`\), 0.4000000000000008`, 
+        0.08333333333333333`, 0, 0.8500000000000003`, 0, 
+        0.016666666666666663`, 
+        0.416666666666667`, \(-0.08333333333333333`\)}, \
+{0.08333333333333337`, 0, \(-0.8416666666666668`\), 0.08333333333333333`, 
+        0, \(-1.658333333333331`\), 0.08333333333333334`, 
+        0, \(-0.833333333333334`\), \(-0.08333333333333337`\), 0, 
+        0.8166666666666673`, \(-0.08333333333333333`\), 0, 
+        1.6833333333333331`, \(-0.08333333333333334`\), 0, 
+        0.833333333333334`}, {\(-0.4249999999999998`\), \
+\(-0.008333333333333335`\), 0.08333333333333334`, \(-0.416666666666667`\), 
+        0.008333333333333335`, \(-0.08333333333333334`\), \
+\(-0.8249999999999982`\), 0, 0, 
+        0.3999999999999999`, \(-0.01666666666666667`\), 0.08333333333333334`, 
+        0.416666666666667`, 0.016666666666666663`, \(-0.08333333333333334`\), 
+        0.8499999999999985`, 0, 0}, {0, \(-0.433333333333334`\), 
+        0.08333333333333334`, 0, \(-0.416666666666667`\), 0, 
+        0, \(-0.816666666666668`\), \(-0.08333333333333334`\), 0, 
+        0.3833333333333333`, 0.08333333333333334`, 0, 0.416666666666667`, 0, 
+        0, 0.8666666666666643`, \(-0.08333333333333334`\)}, {0, 
+        0.08333333333333337`, \(-0.8416666666666677`\), 0, 
+        0.08333333333333333`, \(-0.833333333333334`\), 0, 
+        0.08333333333333334`, \(-1.6583333333333354`\), 
+        0, \(-0.08333333333333337`\), 0.8166666666666673`, 
+        0, \(-0.08333333333333333`\), 0.833333333333334`, 
+        0, \(-0.08333333333333334`\), 1.6833333333333305`}}\)], "Output",
+  CellLabel->"Out[229]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(TableForm[
+      Table[J[gps[\([i, 1]\)], gps[\([i, 2]\)], gps[\([i, 3]\)]], {i, 1, 
+          9}]]\)], "Input",
+  CellLabel->"In[231]:="],
+
+Cell[BoxData[
+    InterpretationBox[GridBox[{
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.09999999999999999`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.09999999999999999`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.1`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.09999999999999999`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.09999999999999999`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.1`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.09999999999999999`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.09999999999999999`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]},
+          {GridBox[{
+                {"0.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"2.`"},
+                {\(-2.`\)},
+                {"0.`"}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}], GridBox[{
+                {"0.`"},
+                {"0.`"},
+                {\(-0.1`\)}
+                },
+              RowSpacings->0.25,
+              ColumnSpacings->1,
+              RowAlignments->Baseline,
+              ColumnAlignments->{Left}]}
+          },
+        RowSpacings->1,
+        ColumnSpacings->3,
+        RowAlignments->Baseline,
+        ColumnAlignments->{Left}],
+      TableForm[ {{{0.0, -2.0, 0.0}, {2.0, -2.0, 0.0}, {0.0, 
+        0.0, -.099999999999999992}}, {{0.0, -2.0, 0.0}, {2.0, -2.0, 0.0}, {
+        0.0, 0.0, -.099999999999999992}}, {{0.0, -2.0, 0.0}, {2.0, -2.0, 
+        0.0}, {0.0, 0.0, -.10000000000000001}}, {{0.0, -2.0, 0.0}, {2.0, -2.0,
+         0.0}, {0.0, 0.0, -.099999999999999992}}, {{0.0, -2.0, 0.0}, {
+        2.0, -2.0, 0.0}, {0.0, 0.0, -.099999999999999992}}, {{0.0, -2.0, 
+        0.0}, {2.0, -2.0, 0.0}, {0.0, 0.0, -.10000000000000001}}, {{0.0, -2.0,
+         0.0}, {2.0, -2.0, 0.0}, {0.0, 0.0, -.099999999999999992}}, {{
+        0.0, -2.0, 0.0}, {2.0, -2.0, 0.0}, {0.0, 
+        0.0, -.099999999999999992}}, {{0.0, -2.0, 0.0}, {2.0, -2.0, 0.0}, {
+        0.0, 0.0, -.10000000000000001}}}]]], "Output",
+  CellLabel->"Out[231]//TableForm="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Table[
+      Nens[gps[\([i, 1]\)], gps[\([i, 2]\)], gps[\([i, 3]\)]], {i, 1, 
+        9}]\)], "Input",
+  CellLabel->"In[233]:="],
+
+Cell[BoxData[
+    \({{{0.8872983346000001`, 0, \(-0.8872983346000001`\), 
+          0.11270166539999998`, 0, \(-0.11270166539999998`\)}, {0, 
+          0.8872983346000001`, \(-0.8872983346000001`\), 0, 
+          0.11270166539999998`, \(-0.11270166539999998`\)}, {\(-\(1\/3\)\), \
+\(-\(1\/12\)\), \(-\(1\/12\)\), 1\/3, 1\/12, 1\/12}}, {{0.8872983346000001`, 
+          0, \(-0.8872983346000001`\), 0.11270166539999998`, 
+          0, \(-0.11270166539999998`\)}, {0, 
+          0.8872983346000001`, \(-0.8872983346000001`\), 0, 
+          0.11270166539999998`, \(-0.11270166539999998`\)}, {\(-\(1\/12\)\), \
+\(-\(1\/3\)\), \(-\(1\/12\)\), 1\/12, 1\/3, 1\/12}}, {{0.8872983346000001`, 
+          0, \(-0.8872983346000001`\), 0.11270166539999998`, 
+          0, \(-0.11270166539999998`\)}, {0, 
+          0.8872983346000001`, \(-0.8872983346000001`\), 0, 
+          0.11270166539999998`, \(-0.11270166539999998`\)}, {\(-\(1\/12\)\), \
+\(-\(1\/12\)\), \(-\(1\/3\)\), 1\/12, 1\/12, 1\/3}}, {{1\/2, 
+          0, \(-\(1\/2\)\), 1\/2, 0, \(-\(1\/2\)\)}, {0, 1\/2, \(-\(1\/2\)\), 
+          0, 1\/2, \(-\(1\/2\)\)}, {\(-\(1\/3\)\), \(-\(1\/12\)\), \(-\(1\/12\
+\)\), 1\/3, 1\/12, 1\/12}}, {{1\/2, 0, \(-\(1\/2\)\), 1\/2, 
+          0, \(-\(1\/2\)\)}, {0, 1\/2, \(-\(1\/2\)\), 0, 
+          1\/2, \(-\(1\/2\)\)}, {\(-\(1\/12\)\), \(-\(1\/3\)\), \
+\(-\(1\/12\)\), 1\/12, 1\/3, 1\/12}}, {{1\/2, 0, \(-\(1\/2\)\), 1\/2, 
+          0, \(-\(1\/2\)\)}, {0, 1\/2, \(-\(1\/2\)\), 0, 
+          1\/2, \(-\(1\/2\)\)}, {\(-\(1\/12\)\), \(-\(1\/12\)\), \
+\(-\(1\/3\)\), 1\/12, 1\/12, 1\/3}}, {{0.11270166539999998`, 
+          0, \(-0.11270166539999998`\), 0.8872983346000001`, 
+          0, \(-0.8872983346000001`\)}, {0, 
+          0.11270166539999998`, \(-0.11270166539999998`\), 0, 
+          0.8872983346000001`, \(-0.8872983346000001`\)}, {\(-\(1\/3\)\), \(-\
+\(1\/12\)\), \(-\(1\/12\)\), 1\/3, 1\/12, 1\/12}}, {{0.11270166539999998`, 
+          0, \(-0.11270166539999998`\), 0.8872983346000001`, 
+          0, \(-0.8872983346000001`\)}, {0, 
+          0.11270166539999998`, \(-0.11270166539999998`\), 0, 
+          0.8872983346000001`, \(-0.8872983346000001`\)}, {\(-\(1\/12\)\), \
+\(-\(1\/3\)\), \(-\(1\/12\)\), 1\/12, 1\/3, 1\/12}}, {{0.11270166539999998`, 
+          0, \(-0.11270166539999998`\), 0.8872983346000001`, 
+          0, \(-0.8872983346000001`\)}, {0, 
+          0.11270166539999998`, \(-0.11270166539999998`\), 0, 
+          0.8872983346000001`, \(-0.8872983346000001`\)}, {\(-\(1\/12\)\), \
+\(-\(1\/12\)\), \(-\(1\/3\)\), 1\/12, 1\/12, 1\/3}}}\)], "Output",
+  CellLabel->"Out[233]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Table[
+      Nxyz[gps[\([i, 1]\)], gps[\([i, 2]\)], gps[\([i, 3]\)]], {i, 1, 
+        9}]\)], "Input",
+  CellLabel->"In[234]:="],
+
+Cell[BoxData[
+    \({{{\(-0.44364916730000004`\), 0.44364916730000004`, 
+          0.`, \(-0.05635083269999999`\), 0.05635083269999999`, 
+          0.`}, {\(-0.44364916730000004`\), 0.`, 
+          0.44364916730000004`, \(-0.05635083269999999`\), 0.`, 
+          0.05635083269999999`}, {3.333333333333333`, 0.8333333333333333`, 
+          0.8333333333333333`, \(-3.333333333333333`\), \
+\(-0.8333333333333333`\), \(-0.8333333333333333`\)}}, \
+{{\(-0.44364916730000004`\), 0.44364916730000004`, 
+          0.`, \(-0.05635083269999999`\), 0.05635083269999999`, 
+          0.`}, {\(-0.44364916730000004`\), 0.`, 
+          0.44364916730000004`, \(-0.05635083269999999`\), 0.`, 
+          0.05635083269999999`}, {0.8333333333333333`, 3.333333333333333`, 
+          0.8333333333333333`, \(-0.8333333333333333`\), \
+\(-3.333333333333333`\), \(-0.8333333333333333`\)}}, \
+{{\(-0.44364916730000004`\), 0.44364916730000004`, 
+          0.`, \(-0.05635083269999999`\), 0.05635083269999999`, 
+          0.`}, {\(-0.44364916730000004`\), 0.`, 
+          0.44364916730000004`, \(-0.05635083269999999`\), 0.`, 
+          0.05635083269999999`}, {0.8333333333333333`, 0.8333333333333333`, 
+          3.333333333333333`, \(-0.8333333333333333`\), \
+\(-0.8333333333333333`\), \(-3.333333333333333`\)}}, {{\(-0.25`\), 0.25`, 
+          0.`, \(-0.25`\), 0.25`, 0.`}, {\(-0.25`\), 0.`, 0.25`, \(-0.25`\), 
+          0.`, 0.25`}, {3.333333333333333`, 0.8333333333333333`, 
+          0.8333333333333333`, \(-3.333333333333333`\), \
+\(-0.8333333333333333`\), \(-0.8333333333333333`\)}}, {{\(-0.25`\), 0.25`, 
+          0.`, \(-0.25`\), 0.25`, 0.`}, {\(-0.25`\), 0.`, 0.25`, \(-0.25`\), 
+          0.`, 0.25`}, {0.8333333333333333`, 3.333333333333333`, 
+          0.8333333333333333`, \(-0.8333333333333333`\), \
+\(-3.333333333333333`\), \(-0.8333333333333333`\)}}, {{\(-0.25`\), 0.25`, 
+          0.`, \(-0.25`\), 0.25`, 0.`}, {\(-0.25`\), 0.`, 0.25`, \(-0.25`\), 
+          0.`, 0.25`}, {0.8333333333333333`, 0.8333333333333333`, 
+          3.333333333333333`, \(-0.8333333333333333`\), \
+\(-0.8333333333333333`\), \(-3.333333333333333`\)}}, \
+{{\(-0.05635083269999999`\), 0.05635083269999999`, 
+          0.`, \(-0.44364916730000004`\), 0.44364916730000004`, 
+          0.`}, {\(-0.05635083269999999`\), 0.`, 
+          0.05635083269999999`, \(-0.44364916730000004`\), 0.`, 
+          0.44364916730000004`}, {3.333333333333333`, 0.8333333333333333`, 
+          0.8333333333333333`, \(-3.333333333333333`\), \
+\(-0.8333333333333333`\), \(-0.8333333333333333`\)}}, \
+{{\(-0.05635083269999999`\), 0.05635083269999999`, 
+          0.`, \(-0.44364916730000004`\), 0.44364916730000004`, 
+          0.`}, {\(-0.05635083269999999`\), 0.`, 
+          0.05635083269999999`, \(-0.44364916730000004`\), 0.`, 
+          0.44364916730000004`}, {0.8333333333333333`, 3.333333333333333`, 
+          0.8333333333333333`, \(-0.8333333333333333`\), \
+\(-3.333333333333333`\), \(-0.8333333333333333`\)}}, \
+{{\(-0.05635083269999999`\), 0.05635083269999999`, 
+          0.`, \(-0.44364916730000004`\), 0.44364916730000004`, 
+          0.`}, {\(-0.05635083269999999`\), 0.`, 
+          0.05635083269999999`, \(-0.44364916730000004`\), 0.`, 
+          0.44364916730000004`}, {0.8333333333333333`, 0.8333333333333333`, 
+          3.333333333333333`, \(-0.8333333333333333`\), \
+\(-0.8333333333333333`\), \(-3.333333333333333`\)}}}\)], "Output",
+  CellLabel->"Out[234]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Nens[e, n, s]\)], "Input",
+  CellLabel->"In[235]:="],
+
+Cell[BoxData[
+    \({{\(1 - s\)\/2, 0, 1\/2\ \((\(-1\) + s)\), \(1 + s\)\/2, 0, 
+        1\/2\ \((\(-1\) - s)\)}, {0, \(1 - s\)\/2, 1\/2\ \((\(-1\) + s)\), 
+        0, \(1 + s\)\/2, 
+        1\/2\ \((\(-1\) - s)\)}, {\(-\(e\/2\)\), \(-\(n\/2\)\), 
+        1\/2\ \((\(-1\) + e + n)\), e\/2, n\/2, 
+        1\/2\ \((1 - e - n)\)}}\)], "Output",
+  CellLabel->"Out[235]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Nxyz[e, n, s]\)], "Input",
+  CellLabel->"In[236]:="],
+
+Cell[BoxData[
+    \({{\(\((1 - s)\)\ \((\(\(0.2`\)\(\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n \
++ 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + \
+0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ \
+s\^2)\)\), \(\((1 - s)\)\ \((\(-0.2`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s \
++ 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + \
+0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((\(-1\) + s)\)\ \
+\((\(-0.2`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\/\(2\ \
+\((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + \
+0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(\((\(-1\) + s)\)\ \((\(\(0.2`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((1 + s)\)\ \((\(\(0.2`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((1 + s)\)\ \((\(-0.2`\) + 0.`\ e \
++ 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ \
+s\^2)\)\), \(\((\(-1\) - s)\)\ \((\(-0.2`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ \
+e\ s + 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ \
+s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(\((\(-1\) - \
+s)\)\ \((\(\(0.2`\)\(\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ \
+e\ s + 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ \
+s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\)}, {\(\((1 - s)\)\
+\ \((\(\(0.2`\)\(\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s \
++ 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + \
+0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) - \(e\ \
+\((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \
+\((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + \
+0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((1 - s)\)\ \((\(\(0.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) - \(n\ \
+\((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \
+\((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + \
+0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((\(-1\) + s)\)\ \((\(\(0.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(\((\(-1\) + s)\)\ \((\(\(0.2`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(\((\(-1\) + e + n)\)\ \
+\((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \
+\((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + \
+0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((1 + s)\)\ \((\(\(0.2`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(e\ \
+\((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \
+\((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + \
+0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((1 + s)\)\ \((\(\(0.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(n\ \
+\((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \
+\((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + \
+0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((\(-1\) - s)\)\ \((\(\(0.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(\((\(-1\) - s)\)\ \((\(\(0.2`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ \
+s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(\((1 - e - n)\)\ \((\(\(0.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ \
+s\^2)\)\)}, {\(\((1 - s)\)\ \((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ \
+s\^2)\)\) - \(e\ \((\(\(4.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ \
+s\^2)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ \
+s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((1 - s)\)\ \((\(\(0.`\)\
+\(\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\
+\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + \
+0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) - \(n\ \((\(\(4.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ \
+s\^2)\)\), \(\((\(-1\) + s)\)\ \((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\/\(\(-0.4`\) + 0.`\ e + 0.`\ n + \
+0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2\) + \
+\(\((\(-1\) + e + n)\)\ \((\(\(4.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\
+\^2)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ \
+s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((1 + s)\)\ \((\(\(0.`\)\
+\(\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\
+\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + \
+0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\) + \(e\ \((\(\(4.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ \
+s\^2)\)\), \(\((1 + s)\)\ \((\(\(0.`\)\(\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ \
+n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + 0.`\ n \
++ 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\
+\) + \(n\ \((\(\(4.`\)\(\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \
+\((\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + \
+0.`\ e\ s\^2 + 0.`\ n\ s\^2)\)\), \(\((\(-1\) - s)\)\ \((\(\(0.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s)\)\)\
+\/\(\(-0.4`\) + 0.`\ e + 0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 \
++ 0.`\ e\ s\^2 + 0.`\ n\ s\^2\) + \(\((1 - e - n)\)\ \((\(\(4.`\)\(\
+\[InvisibleSpace]\)\) + 0.`\ s + 0.`\ s\^2)\)\)\/\(2\ \((\(-0.4`\) + 0.`\ e + \
+0.`\ n + 0.`\ s + 0.`\ e\ s + 0.`\ n\ s + 0.`\ s\^2 + 0.`\ e\ s\^2 + 0.`\ n\ \
+s\^2)\)\)}}\)], "Output",
+  CellLabel->"Out[236]="]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"4.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1600}, {0, 1124}},
+WindowSize->{1173, 912},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+StyleDefinitions -> "Textbook.nb"
+]
+
+
+(***********************************************************************
+Cached data follows.  If you edit this Notebook file directly, not using
+Mathematica, you must remove the line containing CacheID at the top of 
+the file.  The cache data will then be recreated when you save this file 
+from within Mathematica.
+***********************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1739, 51, 59, 0, 85, "Section"],
+
+Cell[CellGroupData[{
+Cell[1823, 55, 45, 0, 40, "Subsection"],
+Cell[1871, 57, 601, 14, 130, "Input"],
+
+Cell[CellGroupData[{
+Cell[2497, 75, 84, 1, 37, "Subsubsection"],
+
+Cell[CellGroupData[{
+Cell[2606, 80, 166, 4, 30, "Input"],
+Cell[2775, 86, 61, 2, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2897, 95, 56, 0, 40, "Subsection"],
+Cell[2956, 97, 1415, 21, 410, "Input"],
+
+Cell[CellGroupData[{
+Cell[4396, 122, 106, 2, 37, "Subsubsection"],
+
+Cell[CellGroupData[{
+Cell[4527, 128, 468, 10, 70, "Input"],
+Cell[4998, 140, 61, 2, 24, "Output"],
+Cell[5062, 144, 61, 2, 24, "Output"],
+Cell[5126, 148, 61, 2, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5248, 157, 109, 3, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[5382, 164, 465, 9, 90, "Input"],
+Cell[5850, 175, 368, 7, 37, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6255, 187, 83, 2, 30, "Input"],
+Cell[6341, 191, 645, 15, 92, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7035, 212, 54, 0, 40, "Subsection"],
+Cell[7092, 214, 159, 3, 30, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7288, 222, 54, 0, 40, "Subsection"],
+Cell[7345, 224, 169, 3, 30, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7551, 232, 45, 0, 40, "Subsection"],
+Cell[7599, 234, 104, 2, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[7728, 240, 80, 2, 30, "Input"],
+Cell[7811, 244, 1639, 31, 94, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9487, 280, 45, 0, 37, "Subsubsection"],
+Cell[9535, 282, 98, 2, 30, "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9682, 290, 119, 3, 40, "Subsection"],
+Cell[9804, 295, 108, 2, 30, "Input"],
+Cell[9915, 299, 2209, 33, 590, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12161, 337, 62, 0, 40, "Subsection"],
+Cell[12226, 339, 97, 2, 30, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12360, 346, 68, 0, 40, "Subsection"],
+Cell[12431, 348, 737, 11, 230, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13205, 364, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[13277, 368, 511, 10, 150, "Input"],
+Cell[13791, 380, 683, 11, 75, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[14511, 396, 78, 2, 30, "Input"],
+Cell[14592, 400, 1151, 23, 180, "Output"]
+}, Open  ]],
+Cell[15758, 426, 121, 3, 30, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[15916, 434, 57, 0, 40, "Subsection"],
+Cell[15976, 436, 710, 12, 170, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16723, 453, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[16795, 457, 268, 5, 110, "Input"],
+Cell[17066, 464, 168, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17295, 474, 55, 0, 85, "Section"],
+
+Cell[CellGroupData[{
+Cell[17375, 478, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[17447, 482, 262, 5, 150, "Input"],
+Cell[17712, 489, 127, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17888, 498, 50, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[17963, 502, 202, 4, 70, "Input"],
+Cell[18168, 508, 158, 3, 24, "Output"],
+Cell[18329, 513, 158, 3, 24, "Output"],
+Cell[18490, 518, 347, 6, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[18874, 529, 202, 4, 70, "Input"],
+Cell[19079, 535, 137, 3, 24, "Output"],
+Cell[19219, 540, 137, 3, 24, "Output"],
+Cell[19359, 545, 273, 5, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19669, 555, 203, 4, 70, "Input"],
+Cell[19875, 561, 138, 3, 24, "Output"],
+Cell[20016, 566, 138, 3, 24, "Output"],
+Cell[20157, 571, 274, 5, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[20492, 583, 55, 0, 53, "Section"],
+
+Cell[CellGroupData[{
+Cell[20572, 587, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[20644, 591, 268, 5, 110, "Input"],
+Cell[20915, 598, 168, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[21132, 607, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[21204, 611, 251, 5, 150, "Input"],
+Cell[21458, 618, 114, 2, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[21621, 626, 50, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[21696, 630, 141, 3, 50, "Input"],
+Cell[21840, 635, 120, 3, 24, "Output"],
+Cell[21963, 640, 127, 3, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[22127, 648, 141, 3, 50, "Input"],
+Cell[22271, 653, 98, 2, 24, "Output"],
+Cell[22372, 657, 99, 2, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[22508, 664, 141, 3, 50, "Input"],
+Cell[22652, 669, 98, 2, 24, "Output"],
+Cell[22753, 673, 99, 2, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[22913, 682, 73, 0, 53, "Section"],
+
+Cell[CellGroupData[{
+Cell[23011, 686, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[23083, 690, 268, 5, 110, "Input"],
+Cell[23354, 697, 168, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[23571, 706, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[23643, 710, 251, 5, 150, "Input"],
+Cell[23897, 717, 114, 2, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[24060, 725, 50, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[24135, 729, 141, 3, 50, "Input"],
+Cell[24279, 734, 152, 3, 24, "Output"],
+Cell[24434, 739, 152, 3, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[24623, 747, 141, 3, 50, "Input"],
+Cell[24767, 752, 151, 3, 24, "Output"],
+Cell[24921, 757, 151, 3, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[25109, 765, 141, 3, 50, "Input"],
+Cell[25253, 770, 152, 3, 24, "Output"],
+Cell[25408, 775, 152, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[25621, 785, 99, 2, 53, "Section"],
+
+Cell[CellGroupData[{
+Cell[25745, 791, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[25817, 795, 268, 5, 110, "Input"],
+Cell[26088, 802, 168, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[26305, 811, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[26377, 815, 407, 8, 190, "Input"],
+Cell[26787, 825, 212, 4, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[27048, 835, 50, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[27123, 839, 141, 3, 50, "Input"],
+Cell[27267, 844, 195, 4, 24, "Output"],
+Cell[27465, 850, 196, 4, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[27698, 859, 141, 3, 50, "Input"],
+Cell[27842, 864, 194, 3, 24, "Output"],
+Cell[28039, 869, 193, 3, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[28269, 877, 141, 3, 50, "Input"],
+Cell[28413, 882, 194, 3, 24, "Output"],
+Cell[28610, 887, 192, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[28863, 897, 98, 2, 53, "Section"],
+
+Cell[CellGroupData[{
+Cell[28986, 903, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[29058, 907, 268, 5, 110, "Input"],
+Cell[29329, 914, 168, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[29546, 923, 47, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[29618, 927, 326, 5, 190, "Input"],
+Cell[29947, 934, 139, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30135, 943, 50, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[30210, 947, 141, 3, 50, "Input"],
+Cell[30354, 952, 111, 2, 24, "Output"],
+Cell[30468, 956, 111, 2, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30616, 963, 141, 3, 50, "Input"],
+Cell[30760, 968, 116, 2, 24, "Output"],
+Cell[30879, 972, 116, 2, 24, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[31032, 979, 141, 3, 50, "Input"],
+Cell[31176, 984, 115, 2, 24, "Output"],
+Cell[31294, 988, 115, 2, 24, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[31470, 997, 55, 0, 53, "Section"],
+
+Cell[CellGroupData[{
+Cell[31550, 1001, 49, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[31624, 1005, 261, 5, 150, "Input"],
+Cell[31888, 1012, 126, 3, 24, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[32063, 1021, 40, 0, 40, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[32128, 1025, 129, 3, 30, "Input"],
+Cell[32260, 1030, 1971, 34, 114, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[34268, 1069, 116, 2, 30, "Input"],
+Cell[34387, 1073, 85, 2, 24, "Output"]
+}, Open  ]],
+Cell[34487, 1078, 313, 6, 50, "Input"],
+Cell[34803, 1086, 107, 2, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[34935, 1092, 60, 2, 30, "Input"],
+Cell[34998, 1096, 6767, 108, 404, "Output"]
+}, Open  ]],
+Cell[41780, 1207, 159, 4, 30, "Input"],
+Cell[41942, 1213, 87, 2, 30, "Input"],
+Cell[42032, 1217, 87, 2, 30, "Input"],
+Cell[42122, 1221, 134, 3, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[42281, 1228, 63, 2, 30, "Input"],
+Cell[42347, 1232, 6793, 110, 404, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[49177, 1347, 158, 4, 30, "Input"],
+Cell[49338, 1353, 7997, 243, 378, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[57372, 1601, 148, 4, 30, "Input"],
+Cell[57523, 1607, 2584, 40, 309, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[60144, 1652, 148, 4, 30, "Input"],
+Cell[60295, 1658, 3424, 55, 252, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[63756, 1718, 72, 2, 30, "Input"],
+Cell[63831, 1722, 368, 7, 37, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[64236, 1734, 72, 2, 30, "Input"],
+Cell[64311, 1738, 7460, 99, 698, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+
+(***********************************************************************
+End of Mathematica Notebook file.
+***********************************************************************)
+
